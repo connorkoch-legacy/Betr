@@ -39,7 +39,7 @@ android:id="@+id/account_page_layout">
                     android:layout_height="match_parent"
                     android:layout_gravity="end"
                     android:layout_marginEnd="20dp"
-                    android:id="@+id/ongoing_bets_toolbar_button"
+                    android:id="@+id/ongoing_bets_toolbar_button_account_page"
                     android:background="@null"
                     android:src="@drawable/ic_monetization"/>
 

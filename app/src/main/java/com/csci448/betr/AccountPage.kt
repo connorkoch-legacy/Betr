@@ -39,7 +39,7 @@ class AccountPage : AppCompatActivity() {
             setHomeAsUpIndicator(R.drawable.ic_menu)
         }
 
-        ongoing_bets_toolbar_button.setOnClickListener {
+        ongoing_bets_toolbar_button_account_page.setOnClickListener {
             //create ongoingbets intent
             var intent = Intent()
             //put extras
