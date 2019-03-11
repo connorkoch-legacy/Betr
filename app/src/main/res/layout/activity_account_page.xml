@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Use DrawerLayout as root container for activity for sidebar-->
-<android.support.v4.widget.DrawerLayout
+<LinearLayout
 xmlns:android="http://schemas.android.com/apk/res/android"
 xmlns:app="http://schemas.android.com/apk/res-auto"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
-android:id="@+id/drawer_layout">
+android:id="@+id/account_page_layout">
 
 <!-- Layout to contain contents of main body of screen (drawer will slide over this) -->
     <LinearLayout
@@ -28,13 +28,21 @@ android:id="@+id/drawer_layout">
             <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_gravity="start"
+                    android:layout_marginEnd="20dp"
+                    android:id="@+id/back_button_toolbar"
+                    android:background="@null"
+                    android:src="@drawable/ic_arrow_back"/>
+
+            <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_gravity="end"
                     android:layout_marginEnd="20dp"
                     android:id="@+id/ongoing_bets_toolbar_button"
                     android:background="@null"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
                     android:src="@drawable/ic_monetization"/>
+
         </android.support.v7.widget.Toolbar>
 
         <TextView
@@ -70,17 +78,4 @@ android:id="@+id/drawer_layout">
 
     </LinearLayout>
 
-<!-- Container for contents of drawer - use NavigationView to make configuration easier -->
-<android.support.design.widget.NavigationView
-        android:id="@+id/nav_view"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        app:headerLayout="@layout/sidebar_header"
-        app:menu="@menu/sidebar_menu"
-/>
-
-
-
-
-</android.support.v4.widget.DrawerLayout>
+</LinearLayout>

@@ -58,14 +58,28 @@
 
         </LinearLayout>
 
+        <!-- ADD FLOATING ACTION BUTTON, must be used in coordinator layout -->
 
-        <android.support.v7.widget.RecyclerView
+        <android.support.design.widget.CoordinatorLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <android.support.v7.widget.RecyclerView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                >
+                    android:layout_height="match_parent">
 
 
-        </android.support.v7.widget.RecyclerView>
+            </android.support.v7.widget.RecyclerView>
+
+            <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/fab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end|bottom"
+                    android:src="@drawable/ic_monetization"
+                    android:layout_margin="16dp" />
+
+        </android.support.design.widget.CoordinatorLayout>
 
     </LinearLayout>
 
