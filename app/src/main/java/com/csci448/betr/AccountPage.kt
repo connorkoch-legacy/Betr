@@ -1,5 +1,6 @@
 package com.csci448.betr
 
+import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -11,16 +12,22 @@ import android.support.v7.widget.Toolbar
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class AccountPage : AppCompatActivity() {
 
     private lateinit var drawerLayout: DrawerLayout
 
+    companion object {
+        //Creates an intent for the OptionsActivity to be returned to the calling activity or fragment
+        fun newIntent(context: Context?): Intent {
+            return Intent(context, AccountPage::class.java)
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_account_page)
 
 
-        //this creates the custom toolbar with the drawer icon and ongoing bets icon
         drawerLayout = findViewById(R.id.drawer_layout)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
@@ -31,17 +38,18 @@ class MainActivity : AppCompatActivity() {
             setHomeAsUpIndicator(R.drawable.ic_menu)
         }
 
-        ongoing_bets_toolbar_button.setOnClickListener{
+        ongoing_bets_toolbar_button.setOnClickListener {
             //create ongoingbets intent
             var intent = Intent()
             //put extras
             startActivity(intent)
         }
 
+
         //Listener for sidebar menu items
         val navigationView: NavigationView = findViewById(R.id.nav_view)
         navigationView.setNavigationItemSelectedListener { menuItem ->
-            when(menuItem.itemId) {
+            when (menuItem.itemId) {
                 R.id.sidebar_account -> {
                     println("sup")
                     var intent: Intent = AccountPage.newIntent(this)
@@ -59,8 +67,8 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
-
     }
+
 
     //Opens the sidebar when the menu icon in the toolbar is tapped
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -73,5 +81,5 @@ class MainActivity : AppCompatActivity() {
         }
         return true
     }
-
 }
+

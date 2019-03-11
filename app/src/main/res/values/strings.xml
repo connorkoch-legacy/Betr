@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Betr</string>
+    <string name="win_loss">Win / Loss:</string>
+    <string name="make_bet">Make a Bet</string>
+    <string name="account">Account</string>
+
 </resources>

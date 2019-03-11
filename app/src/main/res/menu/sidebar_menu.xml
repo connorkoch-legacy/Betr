@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item
+            android:id="@+id/sidebar_win_loss"
+            android:title="@string/win_loss"/>
+    <item
+            android:id="@+id/sidebar_make_bet"
+            android:title="@string/make_bet" />
+    <item
+            android:id="@+id/sidebar_account"
+            android:title="@string/account" />
+</menu>
