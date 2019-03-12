@@ -28,29 +28,41 @@ class AccountPage : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_account_page)
 
-
-        drawerLayout = findViewById(R.id.drawer_layout)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
         val actionbar: ActionBar? = supportActionBar
         actionbar?.apply {
             setDisplayHomeAsUpEnabled(true)
-            setHomeAsUpIndicator(R.drawable.ic_menu)
+            setHomeAsUpIndicator(R.drawable.ic_arrow_back)
         }
 
-        ongoing_bets_toolbar_button_account_page.setOnClickListener {
+        ongoing_bets_toolbar_button_account_page.setOnClickListener{
             //create ongoingbets intent
-            var intent = Intent()
+            var intent = BetPage.newIntent(this)
             //put extras
             startActivity(intent)
         }
 
-        back_button_toolbar.setOnClickListener{
-            //perhaps create a new intent later instead of onbackpressed
-            onBackPressed()
+        friend_list_button.setOnClickListener{
+            //create ongoingbets intent
+            var intent = FindFriends.newIntent(this)
+            //put extras
+            startActivity(intent)
         }
 
+    }
+
+    //Opens the sidebar when the menu icon in the toolbar is tapped
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+                return true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+        return true
     }
 
 }

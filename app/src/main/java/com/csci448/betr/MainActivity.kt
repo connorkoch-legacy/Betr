@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
 
         ongoing_bets_toolbar_button.setOnClickListener{
             //create ongoingbets intent
-            var intent = Intent(this, BetPage::class.java)
+            var intent = BetPage.newIntent(this)
             //put extras
             startActivity(intent)
         }
@@ -51,15 +51,12 @@ class MainActivity : AppCompatActivity() {
         navigationView.setNavigationItemSelectedListener { menuItem ->
             when(menuItem.itemId) {
                 R.id.sidebar_account -> {
-                    println("sup")
                     var intent: Intent = AccountPage.newIntent(this)
                     startActivity(intent)
                 }
                 R.id.sidebar_make_bet -> {
-                    println("sup2")
-                    //Change to bet creation page
-//                    var intent: Intent = BetCreation.newIntent(this)
-//                    startActivity(intent)
+                    var intent: Intent = CreateBet.newIntent(this)
+                    startActivity(intent)
                 }
                 else -> {
 
