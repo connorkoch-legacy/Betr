@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
 
         ongoing_bets_toolbar_button.setOnClickListener{
             //create ongoingbets intent
-            var intent = Intent()
+            var intent = Intent(this, BetPage::class.java)
             //put extras
             startActivity(intent)
         }
@@ -66,6 +66,11 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             true
+        }
+
+        fab.setOnClickListener {
+            var intent = Intent(this, FindFriends::class.java)
+            startActivity(intent)
         }
 
     }

@@ -8,8 +8,8 @@ import kotlinx.android.synthetic.main.find_friends.*
 
 class FindFriends: AppCompatActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         setContentView(R.layout.find_friends)
         tempButton.setOnClickListener{
             val intent = Intent(this, CreateBet::class.java)

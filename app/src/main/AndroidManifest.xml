@@ -9,7 +9,7 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".MainActivity">
+        <activity android:name=".LoginPage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -17,6 +17,20 @@
             </intent-filter>
         </activity>
         <activity android:name=".AccountPage">
+        </activity>
+        <activity android:name=".BetPage">
+        </activity>
+        <activity android:name=".CreateAccount">
+        </activity>
+        <activity android:name=".CreateBet">
+        </activity>
+        <activity android:name=".FindFriends">
+        </activity>
+        <activity android:name=".FinishedBet">
+        </activity>
+        <activity android:name=".MainActivity">
+        </activity>
+        <activity android:name=".OngoingBet">
         </activity>
     </application>
 

@@ -9,7 +9,7 @@ class OngoingBet : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_bet_page)
+        setContentView(R.layout.ongoing_bet_display_page)
 
         back_button.setOnClickListener {
             var intent = Intent(this, MainActivity::class.java)

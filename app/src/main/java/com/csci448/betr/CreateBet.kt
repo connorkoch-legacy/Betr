@@ -10,8 +10,8 @@ import android.widget.Toast
 
 class CreateBet: AppCompatActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         setContentView(R.layout.create_bet)
         selectDateButton.setOnClickListener{
             val toast = Toast.makeText(

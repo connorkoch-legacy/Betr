@@ -9,7 +9,7 @@ class FinishedBet : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_bet_page)
+        setContentView(R.layout.finished_bet_display_page)
 
         back_button.setOnClickListener {
             var intent = Intent(this, MainActivity::class.java)
