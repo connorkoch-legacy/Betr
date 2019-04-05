@@ -22,11 +22,15 @@ class MainAdapter(val user: User, var meOrFriend: Int) : RecyclerView.Adapter<Cu
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
         var userName1: String = ""
         var userName2: String = ""
+        var currentBet: Bet = user.betList[betCounter]
 
+        //Get the usernames of the participants of the current bet being displayed in the recyclerview
         if(meOrFriend == 0) userName1 = "You"
-        else userName1 =  = user.betList[betCounter].betC
-        
+        else userName1 = currentBet.betCreator.userName
+
         holder.view.item_textview_1.text = "$userName1 bet $userName2"
+        holder.view.item_textview_2.text = currentBet.betText
+        holder.view.item_textview_3.text = "%.2f".format(currentBet.betAmount)
 
     }
 
