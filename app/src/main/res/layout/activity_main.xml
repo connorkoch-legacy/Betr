@@ -39,19 +39,21 @@
                 android:orientation="horizontal">
 
             <ToggleButton
+                    android:id="@+id/me_toggle_button"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:checked="true"
+                    android:checked="false"
                     android:textOn="ME"
                     android:textOff="ME"
                     android:textSize="24dp"/>
 
             <ToggleButton
+                    android:id="@+id/friends_toggle_button"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:checked="false"
+                    android:checked="true"
                     android:textOn="FRIENDS"
                     android:textOff="FRIENDS"
                     android:textSize="24dp"/>
@@ -65,10 +67,9 @@
                 android:layout_height="match_parent">
 
             <android.support.v7.widget.RecyclerView
+                    android:id="@+id/main_recyclerview"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
-
-
             </android.support.v7.widget.RecyclerView>
 
             <android.support.design.widget.FloatingActionButton

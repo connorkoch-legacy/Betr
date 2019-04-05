@@ -8,6 +8,7 @@ import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBar
+import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.Toolbar
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_main.*
@@ -26,6 +27,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        //Sets up the recycler view
+        main_recyclerview.layoutManager = LinearLayoutManager(this)
+        main_recyclerview.adapter = MainAdapter()
 
 
         //this creates the custom toolbar with the drawer icon and ongoing bets icon
@@ -68,6 +73,16 @@ class MainActivity : AppCompatActivity() {
         fab.setOnClickListener {
             var intent = Intent(this, FindFriends::class.java)
             startActivity(intent)
+        }
+
+        me_toggle_button.setOnClickListener {
+            me_toggle_button.isChecked = false
+            friends_toggle_button.isChecked = true
+        }
+
+        friends_toggle_button.setOnClickListener {
+            friends_toggle_button.isChecked = false
+            me_toggle_button.isChecked = true
         }
 
     }
