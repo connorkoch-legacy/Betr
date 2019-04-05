@@ -6,12 +6,23 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.main_recyclerview_listitem.view.*
 
-class MainAdapter(val user: User, var meOrFriend: Int) : RecyclerView.Adapter<CustomViewHolder>() { //meOrFriend = 0, me ; = 1, friend
+class MainAdapter(val user: User, var meOrFriend: Int) : RecyclerView.Adapter<MainAdapter.CustomViewHolder>() { //meOrFriend = 0, me ; = 1, friend
 
     var betCounter = 0
+    
+    var friendBets = mutableListOf<Bet>()
+    var numBets = 0
 
     override fun getItemCount(): Int {
-        return user.betList.size
+        if(meOrFriend == 0) return user.betList!!.size
+        else {
+            for(i in 0 until user.friendList!!.size) {
+                for(j in 0 until user.friendList!![i].betList!!.size){
+                    numBets++
+                }
+            }
+            return numBets
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
@@ -22,16 +33,22 @@ class MainAdapter(val user: User, var meOrFriend: Int) : RecyclerView.Adapter<Cu
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
         var userName1: String = ""
         var userName2: String = ""
-        var currentBet: Bet = user.betList[betCounter]
+        var currentBet: Bet = null
 
-        //Get the usernames of the participants of the current bet being displayed in the recyclerview
-        if(meOrFriend == 0) userName1 = "You"
-        else userName1 = currentBet.betCreator.userName
+        if(meOrFriend == 0) {
+            currentBet = user.betList!![betCounter]
 
-        holder.view.item_textview_1.text = "$userName1 bet $userName2"
-        holder.view.item_textview_2.text = currentBet.betText
-        holder.view.item_textview_3.text = "%.2f".format(currentBet.betAmount)
+            userName1 = "You"
+            userName2 = currentBet.betAcceptor.userName
+        } else {
+            currentBet = user.
+        }
 
+        holder.view.item_textview_1.text = "$userName1 bet $userName2:"
+        holder.view.item_textview_2.text = "\t" + currentBet.betText
+        holder.view.item_textview_3.text = "$" + "%.2f".format(currentBet.betAmount)
+
+        betCounter++
     }
 
 }

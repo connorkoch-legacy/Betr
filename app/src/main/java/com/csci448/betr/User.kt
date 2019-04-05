@@ -1,10 +1,3 @@
 package com.csci448.betr
 
-class User {
-
-    var userName: String = ""
-    var passWord: String = ""
-    var friendList: MutableList<User> = mutableListOf()
-    var betList: MutableList<Bet> = mutableListOf()
-
-}
+data class User (var userName: String, var passWord: String, var friendList: MutableList<User>?, var betList: MutableList<Bet>?)

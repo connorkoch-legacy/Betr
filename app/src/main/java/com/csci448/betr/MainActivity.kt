@@ -30,7 +30,23 @@ class MainActivity : AppCompatActivity() {
 
         //Sets up the recycler view
         main_recyclerview.layoutManager = LinearLayoutManager(this)
-        main_recyclerview.adapter = MainAdapter()
+        //TEST USER --------------------------------------------------
+        val tempUser = User("Test User", "pass", null, null)
+        val tempFriend = User("Friend 1", "pass1", null, null)
+        val tempFriend2 = User("Friend 2", "pass2", null, null)
+        var userFriendList = mutableListOf<User>(tempFriend)
+        var friendFriendList = mutableListOf<User>(tempFriend2)
+        tempUser.friendList = userFriendList
+        tempFriend.friendList = friendFriendList
+
+        var userBet = Bet("I bet that the moon is cheese", tempUser, tempFriend, 100.00)
+        var friendBet = Bet("I bet that dogs are bigger than cats", tempFriend, tempFriend2, 17.8932)
+        var userBetList = mutableListOf<Bet>(userBet, friendBet)
+        var friendBetList = mutableListOf<Bet>(friendBet)
+        tempUser.betList = userBetList
+        tempFriend.betList = friendBetList
+        //END TEST USER --------------------------------------------------
+        main_recyclerview.adapter = MainAdapter(tempUser, if(me_toggle_button.isChecked) 1 else 0)
 
 
         //this creates the custom toolbar with the drawer icon and ongoing bets icon
@@ -76,11 +92,16 @@ class MainActivity : AppCompatActivity() {
         }
 
         me_toggle_button.setOnClickListener {
+            if(!me_toggle_button.isChecked) main_recyclerview.adapter = MainAdapter(tempUser, 0)
+
+
             me_toggle_button.isChecked = false
             friends_toggle_button.isChecked = true
         }
 
         friends_toggle_button.setOnClickListener {
+            if(!friends_toggle_button.isChecked) main_recyclerview.adapter = MainAdapter(tempUser, 1)
+
             friends_toggle_button.isChecked = false
             me_toggle_button.isChecked = true
         }
