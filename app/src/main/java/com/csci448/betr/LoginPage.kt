@@ -34,15 +34,13 @@ class LoginPage : AppCompatActivity() {
                     if (task.isSuccessful) {
                         // Sign in success, create correct User object and move to main activity
 
-
                         var intent = MainActivity.newIntent(this)
                         //intent.putExtra(User)
                         startActivity(intent)
-                    } else {
-                        // If sign in fails, display a message to the user.
-                        Toast.makeText(baseContext, "Authentication failed.", Toast.LENGTH_SHORT).show()
                     }
-
+                }
+                .addOnFailureListener {
+                    Toast.makeText(baseContext, "Failed to create user: ${it.message}", Toast.LENGTH_SHORT).show()
                 }
         }
 
