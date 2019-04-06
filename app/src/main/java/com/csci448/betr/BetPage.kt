@@ -5,6 +5,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.util.AttributeSet
+import android.view.View
+import android.widget.Adapter
 import kotlinx.android.synthetic.main.activity_bet_page.*
 
 class BetPage : AppCompatActivity() {
@@ -37,7 +40,18 @@ class BetPage : AppCompatActivity() {
         tempFriend2.betList = friendBetList
 
         betpage_recyclerview.layoutManager = LinearLayoutManager(this)
-        betpage_recyclerview.adapter = BetPageAdapter(tempUser)
+        betpage_recyclerview.adapter = BetPageAdapter(this, tempUser) {
+            if( it == 0){
+                var intent = Intent(this, FinishedBet::class.java)
+                startActivity(intent)
+            }else if(it == 1){
+                var intent = Intent(this, OngoingBet::class.java)
+                startActivity(intent)
+            }else{
+                var intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+            }
+        }
 
 
         temp_finished_bet_button.setOnClickListener {
@@ -54,6 +68,11 @@ class BetPage : AppCompatActivity() {
             var intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    fun finishbet(){
+        var intent = Intent(this, FinishedBet::class.java)
+        startActivity(intent)
     }
 
 }
