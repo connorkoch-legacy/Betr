@@ -29,6 +29,8 @@ class LoginPage : AppCompatActivity() {
 //            var intent = Intent(this, MainActivity::class.java)
 //            startActivity(intent)
 
+            //REGEX TO CHECK STRING EMPTY
+
             auth.signInWithEmailAndPassword(email.text.toString(), password.text.toString())
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {

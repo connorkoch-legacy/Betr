@@ -23,19 +23,15 @@ class BetPageAdapter(val user: User?) : RecyclerView.Adapter<CustomViewHolder>()
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
 
         holder.view.item_textview.text = user!!.betList!![betCounter].betText
-        if(betCounter == 0) {
-            holder.view.item_imagevie.setImageDrawable(R.drawable.ongoing_bets_toolbar_button)
-        }else if(betCounter == 2){
-            holder.view.item_imagevie.setImageDrawable(R.drawable.complete_bets_toolbar_button)
-        }else{
-            holder.view.item_imagevie.setImageDrawable(R.drawable.request_bets_toolbar_button)
-            holder.view.accept_button.visibility = View.VISIBLE
-            holder.view.decline_button.visibility = View.VISIBLE
-        }
+//        if(betCounter == 0) {
+//            holder.view.item_imagevie.setImageDrawable(R.drawable.ongoing_bets_toolbar_button)
+//        }else if(betCounter == 2){
+//            holder.view.item_imagevie.setImageDrawable(R.drawable.complete_bets_toolbar_button)
+//        }else{
+//            holder.view.item_imagevie.setImageDrawable(R.drawable.request_bets_toolbar_button)
+//            holder.view.accept_button.visibility = View.VISIBLE
+//            holder.view.decline_button.visibility = View.VISIBLE
+//        }
         betCounter++
     }
-}
-
-class CustomViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
-
 }
