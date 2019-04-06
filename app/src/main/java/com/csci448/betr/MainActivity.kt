@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         val tempUser = User("Test User", "pass", null, null)
         val tempFriend = User("Friend 1", "pass1", null, null)
         val tempFriend2 = User("Friend 2", "pass2", null, null)
-        var userFriendList = mutableListOf<User>(tempFriend)
+        var userFriendList = mutableListOf<User>(tempFriend, tempFriend2)
         var friendFriendList = mutableListOf<User>(tempFriend2)
         tempUser.friendList = userFriendList
         tempFriend.friendList = friendFriendList
@@ -44,7 +44,8 @@ class MainActivity : AppCompatActivity() {
         var userBetList = mutableListOf<Bet>(userBet, friendBet)
         var friendBetList = mutableListOf<Bet>(friendBet)
         tempUser.betList = userBetList
-        tempFriend.betList = friendBetList
+        tempFriend.betList = userBetList
+        tempFriend2.betList = friendBetList
         //END TEST USER --------------------------------------------------
         main_recyclerview.adapter = MainAdapter(tempUser, if(me_toggle_button.isChecked) 1 else 0)
 
