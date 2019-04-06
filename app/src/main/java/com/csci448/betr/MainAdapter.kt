@@ -9,13 +9,13 @@ import kotlinx.android.synthetic.main.main_recyclerview_listitem.view.*
 class MainAdapter(val user: User, var meOrFriend: Int) : RecyclerView.Adapter<CustomViewHolder>() { //meOrFriend = 0, me ; = 1, friend
 
     var betCounter = 0
+
     var friendBets = mutableListOf<Bet>()
 
     override fun getItemCount(): Int {
         if(meOrFriend == 0) return user.betList!!.size
         else {
             for(i in 0 until user.friendList!!.size) {
-                println(user.friendList!![i].betList!!.size)
                 for(j in 0 until user.friendList!![i].betList!!.size){
                     friendBets.add(user.friendList!![i].betList!![j])
                 }
@@ -40,18 +40,20 @@ class MainAdapter(val user: User, var meOrFriend: Int) : RecyclerView.Adapter<Cu
             userName1 = "You"
             userName2 = currentBet.betAcceptor.userName
         } else {
-            currentBet = friendBets[betCounter]
+            <<<<<<< HEAD
+            =======
 
-            userName1 = currentBet.betCreator.userName
-            userName2 = currentBet.betAcceptor.userName
+            >>>>>>> 070af314527f2e56a2d16d55fe709463a96a4b33
+
         }
 
         holder.view.item_textview_1.text = "$userName1 bet $userName2:"
-        holder.view.item_textview_2.text = "\t" + currentBet.betText
-        holder.view.item_textview_3.text = "$" + "%.2f".format(currentBet.betAmount)
+        holder.view.item_textview_2.text = "\t" + currentBet?.betText
+        holder.view.item_textview_3.text = "$" + "%.2f".format(currentBet?.betAmount)
 
         betCounter++
     }
+
 }
 
 class CustomViewHolder(val view: View) : RecyclerView.ViewHolder(view) {

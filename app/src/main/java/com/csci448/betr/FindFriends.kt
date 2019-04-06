@@ -5,6 +5,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.LinearLayoutManager
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.find_friends.*
 
 class FindFriends: AppCompatActivity() {
@@ -23,7 +25,15 @@ class FindFriends: AppCompatActivity() {
             val intent = Intent(this, CreateBet::class.java)
             startActivity(intent)
         }
+        friend_recycler.layoutManager = LinearLayoutManager(this)
 
+        val tempUser = User("Test User", "pass", null, null)
+        val tempFriend = User("Friend 1", "pass1", null, null)
+        val tempFriend2 = User("Friend 2", "pass2", null, null)
+        var userFriendList = mutableListOf<User>(tempFriend, tempFriend2)
+        tempUser.friendList = userFriendList
+
+        friend_recycler.adapter = FriendAdapter(tempUser)
 
     }
 }
