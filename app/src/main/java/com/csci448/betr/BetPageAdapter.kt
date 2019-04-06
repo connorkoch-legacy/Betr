@@ -32,13 +32,13 @@ class BetPageAdapter(val active: Activity, val user: User?, val itemClick: (Int)
         var current = 0
 
         if(betCounter == 0) {
-            holder.view.item_imagevie.setImageDrawable(R.drawable.ongoing_bets_toolbar_button)
+            holder.view.item_imagevie.setImageResource(R.drawable.ongoing_bet)
             current = 1
         }else if(betCounter == 2){
-            holder.view.item_imagevie.setImageDrawable(R.drawable.complete_bets_toolbar_button)
+            holder.view.item_imagevie.setImageResource(R.drawable.complete_bet)
             current = 2
         }else{
-            holder.view.item_imagevie.setImageDrawable(R.drawable.request_bets_toolbar_button)
+            holder.view.item_imagevie.setImageResource(R.drawable.request_bet)
             holder.view.accept_button.visibility = View.VISIBLE
             holder.view.decline_button.visibility = View.VISIBLE
             current = 3

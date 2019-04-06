@@ -3,9 +3,12 @@ package com.csci448.betr
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.support.v7.app.ActionBar
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.Toolbar
 import android.util.AttributeSet
+import android.view.MenuItem
 import android.view.View
 import android.widget.Adapter
 import kotlinx.android.synthetic.main.activity_bet_page.*
@@ -48,32 +51,38 @@ class BetPage : AppCompatActivity() {
                 var intent = Intent(this, OngoingBet::class.java)
                 startActivity(intent)
             }else{
-                var intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
+//                var intent = Intent(this, MainActivity::class.java)
+//                startActivity(intent)
             }
         }
 
+        val toolbar: Toolbar = findViewById(R.id.toolbar_bets)
+        setSupportActionBar(toolbar)
 
-        temp_finished_bet_button.setOnClickListener {
-            var intent = Intent(this, FinishedBet::class.java)
-            startActivity(intent)
+        val actionbar: ActionBar? = supportActionBar
+        actionbar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            setHomeAsUpIndicator(R.drawable.ic_arrow_back)
         }
+    }
 
-        temp_ongoing_bet_button.setOnClickListener {
-            var intent = Intent(this, OngoingBet::class.java)
-            startActivity(intent)
+    //Opens the sidebar when the menu icon in the toolbar is tapped
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+                return true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
-
-        back_button.setOnClickListener {
-            var intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-        }
+        return true
     }
 
     fun finishbet(){
         var intent = Intent(this, FinishedBet::class.java)
         startActivity(intent)
     }
+
 
 }
 

@@ -4,7 +4,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_marginHorizontal="30dp">
+        android:layout_marginHorizontal="30dp"
+>
 
     <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
@@ -26,7 +27,9 @@
             android:layout_height="wrap_content"
             android:text="TITLE OF BET"
             android:gravity="center"
-            android:textSize="24dp"/>
+            android:textSize="24dp"
+            android:textColor="#000"
+    />
 
     <View
             android:layout_width="match_parent"
@@ -47,12 +50,16 @@
                     android:id="@+id/outcome1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="OUTCOME 1:"/>
+                    android:text="OUTCOME 1:"
+                    android:textColor="#000"
+            />
 
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="I BET YOU STARTED THIS PROJECT LAST NIGHT"/>
+                    android:text="I BET YOU STARTED THIS PROJECT LAST NIGHT"
+                    android:textColor="#000"
+            />
 
         </LinearLayout>
 
@@ -78,12 +85,16 @@
                     android:id="@+id/outcome2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="OUTCOME 1:"/>
+                    android:text="OUTCOME 1:"
+                    android:textColor="#000"
+            />
 
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="YOU STARTED THIS PROJECT A WEEK EARLY"/>
+                    android:text="YOU STARTED THIS PROJECT A WEEK EARLY"
+                    android:textColor="#000"
+            />
 
         </LinearLayout>
 
@@ -104,12 +115,16 @@
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="POT:"/>
+                android:text="POT:"
+                android:textColor="#000"
+        />
 
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="$500"/>
+                android:text="$500"
+                android:textColor="#000"
+        />
 
     </LinearLayout>
 

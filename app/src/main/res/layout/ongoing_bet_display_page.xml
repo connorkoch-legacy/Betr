@@ -26,7 +26,9 @@
             android:layout_height="wrap_content"
             android:text="TITLE OF BET"
             android:gravity="center"
-            android:textSize="24dp"/>
+            android:textSize="24dp"
+            android:textColor="#000"
+    />
 
     <View
             android:layout_width="match_parent"
@@ -41,12 +43,16 @@
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="OUTCOME:"/>
+                android:text="OUTCOME:"
+                android:textColor="#000"
+        />
 
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="I BET YOU STARTED THIS PROJECT LAST NIGHT"/>
+                android:text="I BET YOU STARTED THIS PROJECT LAST NIGHT"
+                android:textColor="#000"
+        />
 
     </LinearLayout>
 
@@ -64,7 +70,9 @@
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="$500"/>
+                android:text="$500"
+                android:textColor="#000"
+        />
 
     </LinearLayout>
 

@@ -3,21 +3,22 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:layout_marginHorizontal="30dp">
+    android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
+            android:id="@+id/toolbar_bets"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
 
-        <ImageButton
-            android:id="@+id/back_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="?android:attr/homeAsUpIndicator"/>
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Choose Bet for Info"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:textColor="#000"/>
 
     </android.support.v7.widget.Toolbar>
 
@@ -29,15 +30,5 @@
 
     </android.support.v7.widget.RecyclerView>
 
-    <Button
-        android:id="@+id/temp_ongoing_bet_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TEMP BUTTON (CHOOSE AN ONGOING BET)"/>
-    <Button
-        android:id="@+id/temp_finished_bet_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TEMP BUTTON (CHOOSE A FINISHED BET)"/>
 
 </LinearLayout>
