@@ -9,6 +9,23 @@
             android:orientation="vertical"
             android:layout_height="match_parent">
 
+        <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar_friends"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Choose a Friend"
+                    android:gravity="center"
+                    android:textSize="18sp"
+                    android:textColor="#000"/>
+
+        </android.support.v7.widget.Toolbar>
+
         <android.support.v7.widget.RecyclerView
                 android:id="@+id/friend_recycler"
                 android:layout_width="match_parent"
@@ -21,11 +38,7 @@
             android:layout_width="match_parent"
             android:gravity="bottom"
             android:layout_height="match_parent">
-        <Button
-                android:layout_width="wrap_content"
-                android:id="@+id/tempButton"
-                android:text="Temp button"
-                android:layout_height="wrap_content"/>
+
     </LinearLayout>
 
 

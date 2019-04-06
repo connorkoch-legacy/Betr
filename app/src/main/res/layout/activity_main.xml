@@ -20,16 +20,15 @@
                 android:background="?attr/colorPrimary"
                 android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
 
-            <ImageButton
+            <Button
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_gravity="end"
                     android:layout_marginEnd="20dp"
                     android:id="@+id/ongoing_bets_toolbar_button"
-                    android:background="@null"
+                    android:text="Ongoing Bets"
                     android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:src="@drawable/ic_monetization"/>
+                    android:layout_alignParentRight="true"/>
 
         </android.support.v7.widget.Toolbar>
 

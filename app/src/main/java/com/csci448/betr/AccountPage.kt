@@ -10,6 +10,7 @@ import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBar
 import android.support.v7.widget.Toolbar
 import android.view.MenuItem
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_account_page.*
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -37,11 +38,8 @@ class AccountPage : AppCompatActivity() {
             setHomeAsUpIndicator(R.drawable.ic_arrow_back)
         }
 
-        ongoing_bets_toolbar_button_account_page.setOnClickListener{
-            //create ongoingbets intent
-            var intent = BetPage.newIntent(this)
-            //put extras
-            startActivity(intent)
+        change_pass_button.setOnClickListener{
+            Toast.makeText(baseContext, "Password Changed", Toast.LENGTH_SHORT).show()
         }
 
         friend_list_button.setOnClickListener{
