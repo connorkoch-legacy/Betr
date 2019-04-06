@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity() {
                     startActivity(intent)
                 }
                 R.id.sidebar_make_bet -> {
-                    var intent: Intent = CreateBet.newIntent(this)
+                    var intent: Intent = FindFriends.newIntent(this)
                     startActivity(intent)
                 }
                 else -> {

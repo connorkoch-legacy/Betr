@@ -9,19 +9,18 @@ import kotlinx.android.synthetic.main.main_recyclerview_listitem.view.*
 class MainAdapter(val user: User, var meOrFriend: Int) : RecyclerView.Adapter<CustomViewHolder>() { //meOrFriend = 0, me ; = 1, friend
 
     var betCounter = 0
-    
+
     var friendBets = mutableListOf<Bet>()
-    var numBets = 0
 
     override fun getItemCount(): Int {
         if(meOrFriend == 0) return user.betList!!.size
         else {
             for(i in 0 until user.friendList!!.size) {
                 for(j in 0 until user.friendList!![i].betList!!.size){
-                    numBets++
+                    friendBets.add(user.friendList!![i].betList!![j])
                 }
             }
-            return numBets
+            return friendBets.size
         }
     }
 
@@ -41,6 +40,10 @@ class MainAdapter(val user: User, var meOrFriend: Int) : RecyclerView.Adapter<Cu
             userName1 = "You"
             userName2 = currentBet.betAcceptor.userName
         } else {
+<<<<<<< HEAD
+=======
+            
+>>>>>>> 070af314527f2e56a2d16d55fe709463a96a4b33
 
         }
 
