@@ -1,0 +1,35 @@
+  {
+  "project_info": {
+    "project_number": "429838217362",
+    "firebase_url": "https://betr-5be61.firebaseio.com",
+    "project_id": "betr-5be61",
+    "storage_bucket": "betr-5be61.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:429838217362:android:5d03190ede5e07f1",
+        "android_client_info": {
+          "package_name": "com.csci448.betr"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5x_PmLDbS70n6-JmbGssb2qh_M664f1s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "429838217362-1jitc16m894asae3hujn0r73ij6tirkd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

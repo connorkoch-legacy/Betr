@@ -14,17 +14,17 @@
             android:textSize="180dp"/>
 
     <EditText
-            android:id="@+id/username"
+            android:id="@+id/email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="username"
-            android:layout_marginVertical="35dp"/>
+            android:hint="Email"
+            android:layout_marginVertical="20dp"/>
 
     <EditText
             android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="password"
+            android:hint="Password"
             android:layout_marginVertical="35dp"/>
 
     <Button
