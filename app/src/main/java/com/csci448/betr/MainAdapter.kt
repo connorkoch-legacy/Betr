@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.main_recyclerview_listitem.view.*
 
-class MainAdapter(val user: User, var meOrFriend: Int) : RecyclerView.Adapter<MainAdapter.CustomViewHolder>() { //meOrFriend = 0, me ; = 1, friend
+class MainAdapter(val user: User, var meOrFriend: Int) : RecyclerView.Adapter<CustomViewHolder>() { //meOrFriend = 0, me ; = 1, friend
 
     var betCounter = 0
     
@@ -33,7 +33,7 @@ class MainAdapter(val user: User, var meOrFriend: Int) : RecyclerView.Adapter<Ma
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
         var userName1: String = ""
         var userName2: String = ""
-        var currentBet: Bet = null
+        var currentBet: Bet? = null
 
         if(meOrFriend == 0) {
             currentBet = user.betList!![betCounter]
@@ -41,12 +41,12 @@ class MainAdapter(val user: User, var meOrFriend: Int) : RecyclerView.Adapter<Ma
             userName1 = "You"
             userName2 = currentBet.betAcceptor.userName
         } else {
-            currentBet = user.
+
         }
 
         holder.view.item_textview_1.text = "$userName1 bet $userName2:"
-        holder.view.item_textview_2.text = "\t" + currentBet.betText
-        holder.view.item_textview_3.text = "$" + "%.2f".format(currentBet.betAmount)
+        holder.view.item_textview_2.text = "\t" + currentBet?.betText
+        holder.view.item_textview_3.text = "$" + "%.2f".format(currentBet?.betAmount)
 
         betCounter++
     }
