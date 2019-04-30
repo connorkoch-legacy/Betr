@@ -41,10 +41,10 @@ class FindFriends: AppCompatActivity() {
 
         friend_recycler.layoutManager = LinearLayoutManager(this)
 
-        val tempUser = User("Test User", "pass", null, null)
-        val tempFriend = User("Friend 1", "pass1", null, null)
-        val tempFriend2 = User("Friend 2", "pass2", null, null)
-        var userFriendList = mutableListOf<User>(tempFriend, tempFriend2)
+        val tempUser = User("Test User", "pass")
+        val tempFriend = User("Friend 1", "pass1")
+        val tempFriend2 = User("Friend 2", "pass2")
+        var userFriendList = mutableListOf<String>(tempFriend.username, tempFriend2.username)
         tempUser.friendList = userFriendList
 
         friend_recycler.adapter = FriendAdapter(tempUser)

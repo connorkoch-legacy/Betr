@@ -22,6 +22,11 @@ android {
     }
 }
 
+//Added so that Parcelize works on User data class
+androidExtensions {
+    experimental = true
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -36,6 +41,7 @@ dependencies {
     implementation 'com.android.support:design:28.0.0'
     implementation 'com.google.firebase:firebase-core:16.0.8'
     implementation 'com.google.firebase:firebase-auth:16.2.1'
+    implementation 'com.google.firebase:firebase-database:16.1.0'
 
 }
 

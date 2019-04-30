@@ -31,16 +31,16 @@ class MainActivity : AppCompatActivity() {
         //Sets up the recycler view
         main_recyclerview.layoutManager = LinearLayoutManager(this)
         //TEST USER --------------------------------------------------
-        val tempUser = User("Test User", "pass", null, null)
-        val tempFriend = User("Friend 1", "pass1", null, null)
-        val tempFriend2 = User("Friend 2", "pass2", null, null)
-        var userFriendList = mutableListOf<User>(tempFriend, tempFriend2)
-        var friendFriendList = mutableListOf<User>(tempFriend2)
+        val tempUser = User("Test User", "pass")
+        val tempFriend = User("Friend 1", "pass1")
+        val tempFriend2 = User("Friend 2", "pass2")
+        var userFriendList = mutableListOf<String>(tempFriend.username, tempFriend2.username)
+        var friendFriendList = mutableListOf<String>(tempFriend2.username)
         tempUser.friendList = userFriendList
         tempFriend.friendList = friendFriendList
 
-        var userBet = Bet("I bet that the moon is cheese", tempUser, tempFriend, 100.00)
-        var friendBet = Bet("I bet that dogs are bigger than cats", tempFriend, tempFriend2, 17.8932)
+        var userBet = Bet("I bet that the moon is cheese", tempUser.username, tempFriend.username, 100.00)
+        var friendBet = Bet("I bet that dogs are bigger than cats", tempFriend.username, tempFriend2.username, 17.8932)
         var userBetList = mutableListOf<Bet>(userBet, friendBet)
         var friendBetList = mutableListOf<Bet>(friendBet)
         tempUser.betList = userBetList

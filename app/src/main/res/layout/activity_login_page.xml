@@ -14,10 +14,10 @@
             android:textSize="180dp"/>
 
     <EditText
-            android:id="@+id/email"
+            android:id="@+id/username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Email"
+            android:hint="Username"
             android:layout_marginVertical="20dp"/>
 
     <EditText

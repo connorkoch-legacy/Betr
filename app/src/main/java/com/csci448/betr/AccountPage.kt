@@ -13,6 +13,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_account_page.*
 import kotlinx.android.synthetic.main.activity_main.*
+import com.google.firebase.database.*
 
 class AccountPage : AppCompatActivity() {
 

@@ -28,8 +28,8 @@ class FriendAdapter(val user: User): RecyclerView.Adapter<CustomViewHolder>(){
         if(friendCounter > 0){
             friendCounter--
         }
-        userName1 = user.friendList!![friendCounter].userName
-        holder.view.friend_textview_1.text = "$userName1"
+//        userName1 = user.friendList!![friendCounter].username
+//        holder.view.friend_textview_1.text = "$userName1"
         friendCounter++
     }
 

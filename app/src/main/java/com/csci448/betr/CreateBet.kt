@@ -10,17 +10,15 @@ import android.support.v7.widget.Toolbar
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.create_bet.*
 import android.widget.Toast
-
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 
 class CreateBet: AppCompatActivity() {
 
-    companion object {
-        //Creates an intent for the OptionsActivity to be returned to the calling activity or fragment
-        fun newIntent(context: Context?): Intent {
-            return Intent(context, CreateBet::class.java)
-        }
-    }
+    private lateinit var users: MutableList<User>
+
+    private var database: DatabaseReference = FirebaseDatabase.getInstance().reference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

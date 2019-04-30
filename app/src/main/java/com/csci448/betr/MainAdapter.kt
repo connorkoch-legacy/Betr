@@ -12,16 +12,17 @@ class MainAdapter(val user: User, var meOrFriend: Int) : RecyclerView.Adapter<Cu
     var friendBets = mutableListOf<Bet>()
 
     override fun getItemCount(): Int {
-        if(meOrFriend == 0) return user.betList!!.size
-        else {
-            for(i in 0 until user.friendList!!.size) {
-                println(user.friendList!![i].betList!!.size)
-                for(j in 0 until user.friendList!![i].betList!!.size){
-                    friendBets.add(user.friendList!![i].betList!![j])
-                }
-            }
-            return friendBets.size
-        }
+//        if(meOrFriend == 0) return user.betList!!.size
+//        else {
+//            for(i in 0 until user.friendList!!.size) {
+//                println(user.friendList!![i].betList!!.size)
+//                for(j in 0 until user.friendList!![i].betList!!.size){
+//                    friendBets.add(user.friendList!![i].betList!![j])
+//                }
+//            }
+//            return friendBets.size
+//        }
+        return 0
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
@@ -34,21 +35,21 @@ class MainAdapter(val user: User, var meOrFriend: Int) : RecyclerView.Adapter<Cu
         var userName2: String = ""
         var currentBet: Bet? = null
 
-        if(meOrFriend == 0) {
-            currentBet = user.betList!![betCounter]
-
-            userName1 = "You"
-            userName2 = currentBet.betAcceptor.userName
-        } else {
-            currentBet = friendBets[betCounter]
-
-            userName1 = currentBet.betCreator.userName
-            userName2 = currentBet.betAcceptor.userName
-        }
-
-        holder.view.item_textview_1.text = "$userName1 bet $userName2:"
-        holder.view.item_textview_2.text = "\t" + currentBet?.betText
-        holder.view.item_textview_3.text = "$" + "%.2f".format(currentBet?.betAmount)
+//        if(meOrFriend == 0) {
+//            currentBet = user.betList!![betCounter]
+//
+//            userName1 = "You"
+//            userName2 = currentBet.betAcceptor.username
+//        } else {
+//            currentBet = friendBets[betCounter]
+//
+//            userName1 = currentBet.betCreator.username
+//            userName2 = currentBet.betAcceptor.username
+//        }
+//
+//        holder.view.item_textview_1.text = "$userName1 bet $userName2:"
+//        holder.view.item_textview_2.text = "\t" + currentBet?.betText
+//        holder.view.item_textview_3.text = "$" + "%.2f".format(currentBet?.betAmount)
 
         betCounter++
     }
