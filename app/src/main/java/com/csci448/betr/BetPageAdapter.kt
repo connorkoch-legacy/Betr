@@ -11,7 +11,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import kotlinx.android.synthetic.main.bet_page_recyclerview_listitem.view.*
 
-class BetPageAdapter(val active: Activity, val user: User?, val itemClick: (Int) -> Unit) : RecyclerView.Adapter<CustomViewHolder>() {
+class BetPageAdapter(val active: Activity, val user: User?, val itemClick: (Int) -> Unit) : RecyclerView.Adapter<MainAdapter.CustomViewHolder>() {
 
     var betCounter = 0
 
@@ -20,12 +20,18 @@ class BetPageAdapter(val active: Activity, val user: User?, val itemClick: (Int)
         return user?.betList?.size ?: return 0
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainAdapter.CustomViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        return CustomViewHolder(layoutInflater.inflate(R.layout.bet_page_recyclerview_listitem, parent, false))
+        return MainAdapter.CustomViewHolder(
+            layoutInflater.inflate(
+                R.layout.bet_page_recyclerview_listitem,
+                parent,
+                false
+            )
+        )
     }
 
-    override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MainAdapter.CustomViewHolder, position: Int) {
 
         holder.view.item_textview.text = user!!.betList!![betCounter].betText
 

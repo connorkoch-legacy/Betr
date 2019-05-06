@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.friend_recyclerview.view.*
 import kotlinx.android.synthetic.main.main_recyclerview_listitem.view.*
 
-class FriendAdapter(val user: User): RecyclerView.Adapter<CustomViewHolder>(){
+class FriendAdapter(val user: User): RecyclerView.Adapter<MainAdapter.CustomViewHolder>(){
     var friendCounter = 0
     var numFriends = 0
 
@@ -18,12 +18,12 @@ class FriendAdapter(val user: User): RecyclerView.Adapter<CustomViewHolder>(){
         return numFriends
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainAdapter.CustomViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        return CustomViewHolder(layoutInflater.inflate(R.layout.friend_recyclerview, parent, false))
+        return MainAdapter.CustomViewHolder(layoutInflater.inflate(R.layout.friend_recyclerview, parent, false))
     }
 
-    override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MainAdapter.CustomViewHolder, position: Int) {
         var userName1: String = ""
         if(friendCounter > 0){
             friendCounter--

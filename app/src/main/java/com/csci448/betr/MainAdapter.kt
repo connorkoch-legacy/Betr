@@ -5,24 +5,35 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.main_recyclerview_listitem.view.*
+import java.util.*
 
-class MainAdapter(val user: User, var meOrFriend: Int) : RecyclerView.Adapter<CustomViewHolder>() { //meOrFriend = 0, me ; = 1, friend
+class MainAdapter(val user: User, val friendList: MutableList<User>, var meOrFriend: Int) :
+    RecyclerView.Adapter<MainAdapter.CustomViewHolder>() { //meOrFriend = 0, me ; = 1, friend
+
+
+    class CustomViewHolder(val view: View) : RecyclerView.ViewHolder(view)
 
     var betCounter = 0
-    var friendBets = mutableListOf<Bet>()
+    var orderedBets: PriorityQueue<Bet> = PriorityQueue()
 
+    //Return number of bets to display in the recyclerview, and also populate the orderedBets priority queue
     override fun getItemCount(): Int {
-//        if(meOrFriend == 0) return user.betList!!.size
-//        else {
-//            for(i in 0 until user.friendList!!.size) {
-//                println(user.friendList!![i].betList!!.size)
-//                for(j in 0 until user.friendList!![i].betList!!.size){
-//                    friendBets.add(user.friendList!![i].betList!![j])
-//                }
-//            }
-//            return friendBets.size
-//        }
-        return 0
+        //If "Me" tab is selected, just return logged in user's number of bets
+        if(meOrFriend == 0) {
+            for(bet in user.betList) {
+                orderedBets.add(bet)
+            }
+            println(orderedBets.peek().betText)
+            return orderedBets.size
+        }
+        else { //Or "Friends" tab is selected, get bets from friends
+            for(i in 0 until friendList.size) {
+                for(j in 0 until friendList[i].betList.size){
+                    orderedBets.add(friendList[i].betList[j])
+                }
+            }
+            return orderedBets.size
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
@@ -35,26 +46,24 @@ class MainAdapter(val user: User, var meOrFriend: Int) : RecyclerView.Adapter<Cu
         var userName2: String = ""
         var currentBet: Bet? = null
 
-//        if(meOrFriend == 0) {
-//            currentBet = user.betList!![betCounter]
-//
-//            userName1 = "You"
-//            userName2 = currentBet.betAcceptor.username
-//        } else {
-//            currentBet = friendBets[betCounter]
-//
-//            userName1 = currentBet.betCreator.username
-//            userName2 = currentBet.betAcceptor.username
-//        }
-//
-//        holder.view.item_textview_1.text = "$userName1 bet $userName2:"
-//        holder.view.item_textview_2.text = "\t" + currentBet?.betText
-//        holder.view.item_textview_3.text = "$" + "%.2f".format(currentBet?.betAmount)
+        if(meOrFriend == 0) {
+            currentBet = orderedBets.peek()
+
+            userName1 = "You"
+            userName2 = currentBet.betAcceptor
+
+            orderedBets.remove()
+        } else {
+            currentBet = orderedBets.peek()
+
+            userName1 = currentBet.betCreator
+            userName2 = currentBet.betAcceptor
+        }
+
+        holder.view.item_textview_1.text = "$userName1 bet $userName2:"
+        holder.view.item_textview_2.text = "\t" + currentBet?.betText
+        holder.view.item_textview_3.text = "$" + "%.2f".format(currentBet?.betAmount)
 
         betCounter++
     }
-}
-
-class CustomViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
-
 }

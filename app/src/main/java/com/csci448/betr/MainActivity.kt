@@ -12,6 +12,10 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.Toolbar
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_main.*
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -28,26 +32,33 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //Get the grand list of users in db and get current logged in user from the intent from login page
+        var users = intent.getParcelableArrayListExtra<User>("USER_LIST").toMutableList()
+        var currentUser = intent.getParcelableExtra<User>("LOGGED_IN_USER")
+        var currentUserFriends: MutableList<User> = mutableListOf()
+
+        //do some preprocessing to get all users in currentUser's friend list
+        for(friendStr in currentUser.friendList){
+            for(u in users){
+                if(friendStr == u.username) currentUserFriends.add(u)
+            }
+        }
+
+        //temp bets for testing
+        val sdf = SimpleDateFormat("dd/MM/yyyy hh:mm:ss", Locale.US)
+        val cal = Calendar.getInstance()
+        cal.add(Calendar.DAY_OF_YEAR, 2)
+        var userBet3 = Bet("Should be last", currentUser.username, "Doug", 100.00, sdf.format(cal.time), sdf.format(cal.time))
+        cal.add(Calendar.DAY_OF_YEAR, -4)
+        var userBet = Bet("I bet that the moon is cheese", currentUser.username, "Doug", 100.00, sdf.format(cal.time), sdf.format(cal.time))
+        cal.add(Calendar.DAY_OF_YEAR, -10)
+        var userBet2 = Bet("Should be first", currentUser.username, "Doug", 100.00, sdf.format(cal.time), sdf.format(cal.time))
+
+        currentUser.betList = mutableListOf(userBet, userBet2, userBet3)
+
         //Sets up the recycler view
         main_recyclerview.layoutManager = LinearLayoutManager(this)
-        //TEST USER --------------------------------------------------
-        val tempUser = User("Test User", "pass")
-        val tempFriend = User("Friend 1", "pass1")
-        val tempFriend2 = User("Friend 2", "pass2")
-        var userFriendList = mutableListOf<String>(tempFriend.username, tempFriend2.username)
-        var friendFriendList = mutableListOf<String>(tempFriend2.username)
-        tempUser.friendList = userFriendList
-        tempFriend.friendList = friendFriendList
-
-        var userBet = Bet("I bet that the moon is cheese", tempUser.username, tempFriend.username, 100.00)
-        var friendBet = Bet("I bet that dogs are bigger than cats", tempFriend.username, tempFriend2.username, 17.8932)
-        var userBetList = mutableListOf<Bet>(userBet, friendBet)
-        var friendBetList = mutableListOf<Bet>(friendBet)
-        tempUser.betList = userBetList
-        tempFriend.betList = userBetList
-        tempFriend2.betList = friendBetList
-        //END TEST USER --------------------------------------------------
-        main_recyclerview.adapter = MainAdapter(tempUser, if(me_toggle_button.isChecked) 1 else 0)
+        main_recyclerview.adapter = MainAdapter(currentUser, currentUserFriends, if(me_toggle_button.isChecked) 1 else 0)
 
 
         //this creates the custom toolbar with the drawer icon and ongoing bets icon
@@ -93,7 +104,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         me_toggle_button.setOnClickListener {
-            if(!me_toggle_button.isChecked) main_recyclerview.adapter = MainAdapter(tempUser, 0)
+            if(!me_toggle_button.isChecked) main_recyclerview.adapter = MainAdapter(currentUser, currentUserFriends, 0)
 
 
             me_toggle_button.isChecked = false
@@ -101,7 +112,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         friends_toggle_button.setOnClickListener {
-            if(!friends_toggle_button.isChecked) main_recyclerview.adapter = MainAdapter(tempUser, 1)
+            if(!friends_toggle_button.isChecked) main_recyclerview.adapter = MainAdapter(currentUser, currentUserFriends, 1)
 
             friends_toggle_button.isChecked = false
             me_toggle_button.isChecked = true
