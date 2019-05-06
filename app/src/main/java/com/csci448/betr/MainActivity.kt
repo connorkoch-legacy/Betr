@@ -36,6 +36,7 @@ class MainActivity : AppCompatActivity() {
         var users = intent.getParcelableArrayListExtra<User>("USER_LIST").toMutableList()
         var currentUser = intent.getParcelableExtra<User>("LOGGED_IN_USER")
         var currentUserFriends: MutableList<User> = mutableListOf()
+        var sortedBets: MutableList<Bet> = mutableListOf()
 
         //do some preprocessing to get all users in currentUser's friend list
         for(friendStr in currentUser.friendList){
@@ -56,9 +57,25 @@ class MainActivity : AppCompatActivity() {
 
         currentUser.betList = mutableListOf(userBet, userBet2, userBet3)
 
+
+        if(!me_toggle_button.isChecked) {
+            for(bet in currentUser.betList) {
+                sortedBets.add(bet)
+            }
+        }
+        else { //Or "Friends" tab is selected, get bets from friends
+            for(i in 0 until currentUserFriends.size) {
+                for(j in 0 until currentUserFriends[i].betList.size){
+                    sortedBets.add(currentUserFriends[i].betList[j])
+                }
+            }
+        }
+
+        sortedBets.sortBy{ sdf.parse(it.dateStart) }
+
         //Sets up the recycler view
         main_recyclerview.layoutManager = LinearLayoutManager(this)
-        main_recyclerview.adapter = MainAdapter(currentUser, currentUserFriends, if(me_toggle_button.isChecked) 1 else 0)
+        main_recyclerview.adapter = MainAdapter(currentUser, sortedBets, if(me_toggle_button.isChecked) 1 else 0)
 
 
         //this creates the custom toolbar with the drawer icon and ongoing bets icon
@@ -85,6 +102,7 @@ class MainActivity : AppCompatActivity() {
             when(menuItem.itemId) {
                 R.id.sidebar_account -> {
                     var intent: Intent = AccountPage.newIntent(this)
+                    intent.putExtra("LOGGED_IN_USER", currentUser)
                     startActivity(intent)
                 }
                 R.id.sidebar_make_bet -> {
@@ -104,7 +122,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         me_toggle_button.setOnClickListener {
-            if(!me_toggle_button.isChecked) main_recyclerview.adapter = MainAdapter(currentUser, currentUserFriends, 0)
+            sortedBets.clear()
+            for(bet in currentUser.betList) {
+                sortedBets.add(bet)
+            }
+            if(!me_toggle_button.isChecked) main_recyclerview.adapter = MainAdapter(currentUser, sortedBets, 0)
 
 
             me_toggle_button.isChecked = false
@@ -112,7 +134,13 @@ class MainActivity : AppCompatActivity() {
         }
 
         friends_toggle_button.setOnClickListener {
-            if(!friends_toggle_button.isChecked) main_recyclerview.adapter = MainAdapter(currentUser, currentUserFriends, 1)
+            sortedBets.clear()
+            for(i in 0 until currentUserFriends.size) {
+                for(j in 0 until currentUserFriends[i].betList.size){
+                    sortedBets.add(currentUserFriends[i].betList[j])
+                }
+            }
+            if(!friends_toggle_button.isChecked) main_recyclerview.adapter = MainAdapter(currentUser, sortedBets, 1)
 
             friends_toggle_button.isChecked = false
             me_toggle_button.isChecked = true

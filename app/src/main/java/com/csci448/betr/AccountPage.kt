@@ -19,6 +19,8 @@ class AccountPage : AppCompatActivity() {
 
     private lateinit var drawerLayout: DrawerLayout
 
+    private var database: DatabaseReference = FirebaseDatabase.getInstance().reference
+
     companion object {
         //Creates an intent for the OptionsActivity to be returned to the calling activity or fragment
         fun newIntent(context: Context?): Intent {

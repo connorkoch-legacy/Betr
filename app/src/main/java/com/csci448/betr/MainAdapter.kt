@@ -7,33 +7,32 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.main_recyclerview_listitem.view.*
 import java.util.*
 
-class MainAdapter(val user: User, val friendList: MutableList<User>, var meOrFriend: Int) :
+class MainAdapter(val user: User, val sortedBets: MutableList<Bet>, var meOrFriend: Int) :
     RecyclerView.Adapter<MainAdapter.CustomViewHolder>() { //meOrFriend = 0, me ; = 1, friend
 
 
     class CustomViewHolder(val view: View) : RecyclerView.ViewHolder(view)
 
     var betCounter = 0
-    var orderedBets: PriorityQueue<Bet> = PriorityQueue()
 
     //Return number of bets to display in the recyclerview, and also populate the orderedBets priority queue
     override fun getItemCount(): Int {
-        //If "Me" tab is selected, just return logged in user's number of bets
-        if(meOrFriend == 0) {
-            for(bet in user.betList) {
-                orderedBets.add(bet)
-            }
-            println(orderedBets.peek().betText)
-            return orderedBets.size
-        }
-        else { //Or "Friends" tab is selected, get bets from friends
-            for(i in 0 until friendList.size) {
-                for(j in 0 until friendList[i].betList.size){
-                    orderedBets.add(friendList[i].betList[j])
-                }
-            }
-            return orderedBets.size
-        }
+//        //If "Me" tab is selected, just return logged in user's number of bets
+//        if(meOrFriend == 0) {
+//            for(bet in user.betList) {
+//                betsList.add(bet)
+//            }
+//            return user.betList.size
+//        }
+//        else { //Or "Friends" tab is selected, get bets from friends
+//            for(i in 0 until friendList.size) {
+//                for(j in 0 until friendList[i].betList.size){
+//                    orderedBets.add(friendList[i].betList[j])
+//                }
+//            }
+//            return orderedBets.size
+//        }
+        return sortedBets.size
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
@@ -46,16 +45,12 @@ class MainAdapter(val user: User, val friendList: MutableList<User>, var meOrFri
         var userName2: String = ""
         var currentBet: Bet? = null
 
-        if(meOrFriend == 0) {
-            currentBet = orderedBets.peek()
+        currentBet = sortedBets[position]
 
+        if(meOrFriend == 0) {
             userName1 = "You"
             userName2 = currentBet.betAcceptor
-
-            orderedBets.remove()
         } else {
-            currentBet = orderedBets.peek()
-
             userName1 = currentBet.betCreator
             userName2 = currentBet.betAcceptor
         }
