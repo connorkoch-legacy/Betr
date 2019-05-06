@@ -102,11 +102,16 @@ class MainActivity : AppCompatActivity() {
             when(menuItem.itemId) {
                 R.id.sidebar_account -> {
                     var intent: Intent = AccountPage.newIntent(this)
-                    intent.putExtra("LOGGED_IN_USER", currentUser)
+                    intent.putParcelableArrayListExtra("FRIEND_LIST", ArrayList(users))
+                    intent.putParcelableArrayListExtra("USER_LIST", ArrayList(currentUserFriends))
+                    intent.putExtra("LOGGED_IN_USER", currentUser)   
                     startActivity(intent)
                 }
                 R.id.sidebar_make_bet -> {
                     var intent: Intent = FindFriends.newIntent(this)
+                    intent.putParcelableArrayListExtra("FRIEND_LIST", ArrayList(users))
+                    intent.putParcelableArrayListExtra("USER_LIST", ArrayList(currentUserFriends))
+                    intent.putExtra("LOGGED_IN_USER", currentUser)
                     startActivity(intent)
                 }
                 else -> {
