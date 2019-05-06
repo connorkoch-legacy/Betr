@@ -25,6 +25,9 @@ class FindFriends: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.find_friends)
+        var friendsList = intent.getParcelableArrayListExtra<User>("FRIEND_LIST").toMutableList()
+        var currentUser = intent.getParcelableExtra<User>("LOGGED_IN_USER")
+        var users = intent.getParcelableArrayListExtra<User>("USER_LIST").toMutableList()
 //        tempButton.setOnClickListener{
 //            val intent = Intent(this, CreateBet::class.java)
 //            startActivity(intent)
@@ -41,13 +44,13 @@ class FindFriends: AppCompatActivity() {
 
         friend_recycler.layoutManager = LinearLayoutManager(this)
 
-        val tempUser = User("Test User", "pass")
-        val tempFriend = User("Friend 1", "pass1")
-        val tempFriend2 = User("Friend 2", "pass2")
-        var userFriendList = mutableListOf<String>(tempFriend.username, tempFriend2.username)
-        tempUser.friendList = userFriendList
+        //val tempUser = User("Test User", "pass")
+        //val tempFriend = User("Friend 1", "pass1")
+        //val tempFriend2 = User("Friend 2", "pass2")
+        //var userFriendList = mutableListOf<String>(tempFriend.username, tempFriend2.username)
+        //tempUser.friendList = userFriendList
 
-        friend_recycler.adapter = FriendAdapter(tempUser, this)
+        friend_recycler.adapter = FriendAdapter(currentUser, this)
 
 
     }
