@@ -1,21 +1,28 @@
 package com.csci448.betr
 
+import android.content.Context
+import android.content.Intent
+import android.support.v4.content.ContextCompat.startActivity
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import kotlinx.android.synthetic.main.friend_recyclerview.view.*
 import kotlinx.android.synthetic.main.main_recyclerview_listitem.view.*
 
-class FriendAdapter(val user: User): RecyclerView.Adapter<MainAdapter.CustomViewHolder>(){
+class FriendAdapter(val user: User, context: Context): RecyclerView.Adapter<MainAdapter.CustomViewHolder>(){
     var friendCounter = 0
     var numFriends = 0
+    var FRIEND_TAG = "sending friend"
+    val LOG_TAG = "FROGGGGGGGG"
+    var myContext = context
 
     override fun getItemCount(): Int {
-        for(i in 0 until user.friendList!!.size) {
-            numFriends++
-        }
-        return numFriends
+        Log.d(LOG_TAG, user.friendList!!.size.toString())
+        return user.friendList!!.size
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainAdapter.CustomViewHolder {
@@ -25,11 +32,13 @@ class FriendAdapter(val user: User): RecyclerView.Adapter<MainAdapter.CustomView
 
     override fun onBindViewHolder(holder: MainAdapter.CustomViewHolder, position: Int) {
         var userName1: String = ""
-        if(friendCounter > 0){
-            friendCounter--
+        userName1 = user.friendList!![position]
+        holder.view.friend_textview_1.text = "$userName1"
+        holder.view.setOnClickListener {
+            var intent = Intent(myContext, CreateBet::class.java)
+            intent.putExtra(FRIEND_TAG, userName1)
+            myContext.startActivity(intent)
         }
-//        userName1 = user.friendList!![friendCounter].username
-//        holder.view.friend_textview_1.text = "$userName1"
         friendCounter++
     }
 

@@ -47,7 +47,8 @@ class FindFriends: AppCompatActivity() {
         var userFriendList = mutableListOf<String>(tempFriend.username, tempFriend2.username)
         tempUser.friendList = userFriendList
 
-        friend_recycler.adapter = FriendAdapter(tempUser)
+        friend_recycler.adapter = FriendAdapter(tempUser, this)
+
 
     }
 

@@ -23,14 +23,7 @@ class CreateBet: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.create_bet)
-        selectDateButton.setOnClickListener{
-            val toast = Toast.makeText(
-                applicationContext,
-                "This is where I'm going to add the select date widget",
-                Toast.LENGTH_SHORT
-            )
-            toast.show()
-        }
+
 
         val toolbar: Toolbar = findViewById(R.id.toolbar_friends)
         setSupportActionBar(toolbar)
