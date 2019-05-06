@@ -123,6 +123,9 @@ class MainActivity : AppCompatActivity() {
 
         fab.setOnClickListener {
             var intent = Intent(this, FindFriends::class.java)
+            intent.putParcelableArrayListExtra("FRIEND_LIST", ArrayList(users))
+            intent.putParcelableArrayListExtra("USER_LIST", ArrayList(currentUserFriends))
+            intent.putExtra("LOGGED_IN_USER", currentUser)
             startActivity(intent)
         }
 
