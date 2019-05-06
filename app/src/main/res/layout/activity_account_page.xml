@@ -33,13 +33,18 @@ android:id="@+id/account_page_layout">
                 android:text="YOUR ACCOUNT"
                 android:textSize="24dp"/>
 
-
         <ImageView
                 android:id="@+id/sidebar_image"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:src="@mipmap/ic_launcher"
                 android:layout_margin="50dp"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Click portrait to change image"
+                android:textSize="24dp"/>
 
         <Button
                 android:id="@+id/change_pass_button"

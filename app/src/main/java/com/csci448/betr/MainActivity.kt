@@ -104,7 +104,7 @@ class MainActivity : AppCompatActivity() {
                     var intent: Intent = AccountPage.newIntent(this)
                     intent.putParcelableArrayListExtra("FRIEND_LIST", ArrayList(users))
                     intent.putParcelableArrayListExtra("USER_LIST", ArrayList(currentUserFriends))
-                    intent.putExtra("LOGGED_IN_USER", currentUser)   
+                    intent.putExtra("LOGGED_IN_USER", currentUser)
                     startActivity(intent)
                 }
                 R.id.sidebar_make_bet -> {

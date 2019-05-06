@@ -55,9 +55,33 @@ class CreateAccount: AppCompatActivity() {
                     val newUser = User(username, password)
 
                     //Push to database with a random key and newUser as value
-                    val key: String = database.child("users").push().key!!
+                    var key: String = database.child("users").push().key!!
                     database.child("users").child(key).setValue(newUser)
                     Log.d("CreateAccount", key)
+
+                    //_______________TEST
+                    val newUser1 = User("Roberto", "123")
+                    val newUser2 = User("Guadalupe", "123")
+                    val newUser3 = User("Bernoulli", "123")
+                    val newUser4 = User("Xiong", "123")
+                    var f1List = mutableListOf<String>(newUser2.username, newUser3.username, newUser4.username)
+                    newUser1.friendList = f1List
+                    users.add(newUser1)
+                    users.add(newUser2)
+                    users.add(newUser3)
+                    users.add(newUser4)
+
+                    key = database.child("users").push().key!!
+                    database.child("users").child(key).setValue(newUser1)
+                    key = database.child("users").push().key!!
+                    database.child("users").child(key).setValue(newUser2)
+                    key = database.child("users").push().key!!
+                    database.child("users").child(key).setValue(newUser3)
+                    key = database.child("users").push().key!!
+                    database.child("users").child(key).setValue(newUser4)
+
+                    //_______________TEST
+
 
                     users.add(newUser)
 
