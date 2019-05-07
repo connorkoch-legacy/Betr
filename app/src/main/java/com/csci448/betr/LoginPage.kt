@@ -51,6 +51,7 @@ class LoginPage : AppCompatActivity() {
                 var existsFlag = false
                 for(u in users){
                     if(u.username == username.text.toString() && u.password == password.text.toString()){
+                        println("" + u.username + " " + u.password)
                         existsFlag = true
                         //if a user is found in the users list that matches the credentials, move to MainActivity
                         var intent = Intent(this, MainActivity::class.java)

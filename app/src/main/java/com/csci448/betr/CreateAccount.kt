@@ -12,7 +12,6 @@ import android.support.v7.app.AppCompatActivity
 import android.util.EventLogTags
 import android.util.Log
 import android.widget.Toast
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_login_page.*
@@ -128,7 +127,7 @@ class CreateAccount: AppCompatActivity() {
 
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
 
-            val importance = NotificationManager.IMPO
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
 
             val channel = NotificationChannel("BETRCHANNEL", "Betr", importance).apply{
                 description = "Account Creation Notification"

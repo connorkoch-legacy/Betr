@@ -34,9 +34,9 @@ android:id="@+id/account_page_layout">
                 android:textSize="24dp"/>
 
         <ImageView
-                android:id="@+id/sidebar_image"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:id="@+id/profile_picture"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:src="@mipmap/ic_launcher"
                 android:layout_margin="50dp"/>
 

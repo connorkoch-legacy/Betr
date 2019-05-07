@@ -1,9 +1,12 @@
 package com.csci448.betr
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.MediaStore
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
@@ -20,6 +23,8 @@ class AccountPage : AppCompatActivity() {
     private lateinit var drawerLayout: DrawerLayout
 
     private var database: DatabaseReference = FirebaseDatabase.getInstance().reference
+
+    private val CAMERA_REQUEST_CODE = 1
 
     companion object {
         //Creates an intent for the OptionsActivity to be returned to the calling activity or fragment
@@ -39,6 +44,13 @@ class AccountPage : AppCompatActivity() {
         actionbar?.apply {
             setDisplayHomeAsUpEnabled(true)
             setHomeAsUpIndicator(R.drawable.ic_arrow_back)
+        }
+
+        profile_picture.setOnClickListener{
+            val callCameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            if(callCameraIntent.resolveActivity(packageManager) != null){
+                startActivityForResult(callCameraIntent, CAMERA_REQUEST_CODE)
+            }
         }
 
         change_pass_button.setOnClickListener{
@@ -64,6 +76,16 @@ class AccountPage : AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
         return true
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if(requestCode == CAMERA_REQUEST_CODE){
+            if(resultCode == Activity.RESULT_OK && data != null){
+                profile_picture.setImageBitmap(data.extras.get("data") as Bitmap)
+            }
+        }
     }
 
 }

@@ -17,21 +17,6 @@ class MainAdapter(val user: User, val sortedBets: MutableList<Bet>, var meOrFrie
 
     //Return number of bets to display in the recyclerview, and also populate the orderedBets priority queue
     override fun getItemCount(): Int {
-//        //If "Me" tab is selected, just return logged in user's number of bets
-//        if(meOrFriend == 0) {
-//            for(bet in user.betList) {
-//                betsList.add(bet)
-//            }
-//            return user.betList.size
-//        }
-//        else { //Or "Friends" tab is selected, get bets from friends
-//            for(i in 0 until friendList.size) {
-//                for(j in 0 until friendList[i].betList.size){
-//                    orderedBets.add(friendList[i].betList[j])
-//                }
-//            }
-//            return orderedBets.size
-//        }
         return sortedBets.size
     }
 
