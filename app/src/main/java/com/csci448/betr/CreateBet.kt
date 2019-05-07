@@ -68,8 +68,8 @@ class CreateBet: AppCompatActivity() {
 
             //create intent to go back to MainActivity
             var intent = Intent(this, MainActivity::class.java)
-            intent.putParcelableArrayListExtra("FRIEND_LIST", ArrayList(users))
-            //intent.putParcelableArrayListExtra("USER_LIST", ArrayList(friendsList))
+            //intent.putParcelableArrayListExtra("FRIEND_LIST", ArrayList(users))
+            intent.putParcelableArrayListExtra("USER_LIST", ArrayList(friendsList))
             intent.putExtra("LOGGED_IN_USER", currentUser)
             startActivity(intent)
         }
