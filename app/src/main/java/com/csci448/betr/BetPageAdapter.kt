@@ -11,13 +11,13 @@ import android.view.ViewGroup
 import android.widget.TextView
 import kotlinx.android.synthetic.main.bet_page_recyclerview_listitem.view.*
 
-class BetPageAdapter(val active: Activity, val user: User?, val itemClick: (Int) -> Unit) : RecyclerView.Adapter<MainAdapter.CustomViewHolder>() {
+class BetPageAdapter(val active: Activity, val bet: MutableList<Bet>, val itemClick: (Int) -> Unit) : RecyclerView.Adapter<MainAdapter.CustomViewHolder>() {
 
     var betCounter = 0
 
     override fun getItemCount(): Int {
 
-        return user?.betList?.size ?: return 0
+        return bet.size
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainAdapter.CustomViewHolder {
@@ -33,21 +33,22 @@ class BetPageAdapter(val active: Activity, val user: User?, val itemClick: (Int)
 
     override fun onBindViewHolder(holder: MainAdapter.CustomViewHolder, position: Int) {
 
-        holder.view.item_textview.text = user!!.betList!![betCounter].betText
+        holder.view.item_textview.text = bet[betCounter].betText
 
         var current = 0
 
+
         if(betCounter == 0) {
             holder.view.item_imagevie.setImageResource(R.drawable.ongoing_bet)
-            current = 1
+            current = 0
         }else if(betCounter == 2){
             holder.view.item_imagevie.setImageResource(R.drawable.complete_bet)
-            current = 2
+            current = 1
         }else{
             holder.view.item_imagevie.setImageResource(R.drawable.request_bet)
             holder.view.accept_button.visibility = View.VISIBLE
             holder.view.decline_button.visibility = View.VISIBLE
-            current = 3
+            current = 2
         }
 
         betCounter++
