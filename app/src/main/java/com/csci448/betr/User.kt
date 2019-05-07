@@ -8,5 +8,4 @@ import kotlinx.android.parcel.RawValue
 //Class extends Parcelable so it can be sent over intent
 @Parcelize
 data class User (var username: String = "", var password: String = "",
-                 var friendList: List<String> = listOf(), var betList: List<Bet> = listOf(),
-                 var profilePic: String = "") : Parcelable
+                 var friendList: List<String> = listOf(), var betList: List<Bet> = listOf(), var profilePic: String = "") : Parcelable

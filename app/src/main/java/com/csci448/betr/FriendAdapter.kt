@@ -27,7 +27,6 @@ class FriendAdapter(val user: User, context: Context, friendUserList:MutableList
     override fun getItemCount(): Int {
         Log.d(LOG_TAG, listOfFriendUsers!!.size.toString())
         return listOfFriendUsers!!.size
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainAdapter.CustomViewHolder {

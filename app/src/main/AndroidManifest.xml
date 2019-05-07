@@ -32,6 +32,8 @@
         </activity>
         <activity android:name=".OngoingBet">
         </activity>
+        <activity android:name=".ChangePassword">
+        </activity>
     </application>
 
 </manifest>

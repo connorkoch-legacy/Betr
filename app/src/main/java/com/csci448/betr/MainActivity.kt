@@ -45,20 +45,21 @@ class MainActivity : AppCompatActivity() {
         for(friendStr in currentUser.friendList){
             for(u in users){
                 if(friendStr == u.username) currentUserFriends.add(u)
+                break
             }
         }
 
         //temp bets for testing
         val sdf = SimpleDateFormat("dd/MM/yyyy hh:mm:ss", Locale.US)
-        val cal = Calendar.getInstance()
-        cal.add(Calendar.DAY_OF_YEAR, 2)
-        var userBet3 = Bet("Should be last", currentUser.username, "Doug", 100.00, sdf.format(cal.time), sdf.format(cal.time))
-        cal.add(Calendar.DAY_OF_YEAR, -4)
-        var userBet = Bet("I bet that the moon is cheese", currentUser.username, "Doug", 100.00, sdf.format(cal.time), sdf.format(cal.time))
-        cal.add(Calendar.DAY_OF_YEAR, -10)
-        var userBet2 = Bet("Should be first", currentUser.username, "Doug", 100.00, sdf.format(cal.time), sdf.format(cal.time))
+//        val cal = Calendar.getInstance()
+//        cal.add(Calendar.DAY_OF_YEAR, 2)
+//        var userBet3 = Bet("Should be last", currentUser.username, "Craig", 100.00, sdf.format(cal.time), sdf.format(cal.time))
+//        cal.add(Calendar.DAY_OF_YEAR, -4)
+//        var userBet = Bet("I bet that the moon is cheese", currentUser.username, "Doug", 49.00, sdf.format(cal.time), sdf.format(cal.time))
+//        cal.add(Calendar.DAY_OF_YEAR, -10)
+//        var userBet2 = Bet("Should be first", currentUser.username, "Stan", 5.00, sdf.format(cal.time), sdf.format(cal.time))
 
-        currentUser.betList = mutableListOf(userBet, userBet2, userBet3)
+        //currentUser.betList = mutableListOf(userBet, userBet2, userBet3)
 
 
         if(!me_toggle_button.isChecked) {
@@ -172,12 +173,12 @@ class MainActivity : AppCompatActivity() {
         }
         return true
     }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if(requestCode == ACCOUNT_REQUEST_CODE){
-            if(resultCode == Activity.RESULT_OK){
-
-            }
-        }
-    }
+//
+//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//        if(requestCode == ACCOUNT_REQUEST_CODE){
+//            if(resultCode == Activity.RESULT_OK){
+//
+//            }
+//        }
+//    }
 }

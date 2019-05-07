@@ -43,9 +43,11 @@ class CreateBet: AppCompatActivity() {
             var friendUser:User = User()
             var tempBetText = TitleText.text.toString()
             var tempBetAmount = amountText.text.toString().toDouble()
-            var tempdateEnd = dateText.text.toString()
+            var tempdateEnd = dateText.text.toString().toInt()
             val sdf = SimpleDateFormat("dd/MM/yyyy hh:mm:ss", Locale.US)
-            val cal = Calendar.getInstance()
+            val calStart = Calendar.getInstance()
+            val calEnd = Calendar.getInstance()
+            calEnd.add(Calendar.DATE, tempdateEnd)
             for(tempUser in users){
                 if(tempUser.username == friend){
                     friendUser = tempUser
@@ -53,8 +55,8 @@ class CreateBet: AppCompatActivity() {
             }
 
             //update bet list of current user and friend
-            var userBet:Bet = Bet(tempBetText, currentUser.username, friend, tempBetAmount, sdf.format(cal.time), tempdateEnd)
-            var friendBet:Bet = Bet(tempBetText, friend, currentUser.username, tempBetAmount, sdf.format(cal.time), tempdateEnd)
+            var userBet:Bet = Bet(tempBetText, currentUser.username, friend, tempBetAmount, sdf.format(calStart.time), sdf.format(calEnd.time))
+            var friendBet:Bet = Bet(tempBetText, friend, currentUser.username, tempBetAmount, sdf.format(calStart.time), sdf.format(calEnd.time))
             val tempBetListUser = currentUser.betList.toMutableList()
             tempBetListUser.add(friendBet)
             currentUser.betList = tempBetListUser.toList()
