@@ -96,6 +96,8 @@ class MainActivity : AppCompatActivity() {
             //create ongoingbets intent
             var intent = BetPage.newIntent(this)
             //put extras
+            intent.putExtra("USERS_KEY", this.intent.getParcelableArrayListExtra<User>("USER_LIST"))
+            intent.putExtra("CURRENT_USER_KEY", this.intent.getParcelableExtra<User>("LOGGED_IN_USER"))
             startActivity(intent)
         }
 
