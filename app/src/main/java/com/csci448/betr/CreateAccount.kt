@@ -1,9 +1,15 @@
 package com.csci448.betr
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.Intent
+import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.support.v4.app.NotificationCompat
 import android.support.v7.app.AppCompatActivity
+import android.util.EventLogTags
 import android.util.Log
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
@@ -11,12 +17,17 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_login_page.*
 import kotlinx.android.synthetic.main.create_account.*
+import java.util.jar.Attributes
 
 class CreateAccount: AppCompatActivity() {
 
     private lateinit var users: MutableList<User>
+    private lateinit var notificationManager : NotificationManager
 
     private var database: DatabaseReference = FirebaseDatabase.getInstance().reference
+
+    //CREATE ACCOUNT CREATION NOTIFICATION
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,32 +71,47 @@ class CreateAccount: AppCompatActivity() {
                     Log.d("CreateAccount", key)
 
                     //_______________TEST
-                    val newUser1 = User("Roberto", "123")
-                    val newUser2 = User("Guadalupe", "123")
-                    val newUser3 = User("Bernoulli", "123")
-                    val newUser4 = User("Xiong", "123")
-                    var f1List = mutableListOf<String>(newUser2.username, newUser3.username, newUser4.username)
-                    newUser1.friendList = f1List
-                    users.add(newUser1)
-                    users.add(newUser2)
-                    users.add(newUser3)
-                    users.add(newUser4)
+//                    val newUser1 = User("Roberto", "123")
+//                    val newUser2 = User("Guadalupe", "123")
+//                    val newUser3 = User("Bernoulli", "123")
+//                    val newUser4 = User("Xiong", "123")
+//                    var f1List = mutableListOf<String>(newUser2.username, newUser3.username, newUser4.username)
+//                    newUser1.friendList = f1List
+//                    users.add(newUser1)
+//                    users.add(newUser2)
+//                    users.add(newUser3)
+//                    users.add(newUser4)
+//
+//                    key = database.child("users").push().key!!
+//                    database.child("users").child(key).setValue(newUser1)
+//                    key = database.child("users").push().key!!
+//                    database.child("users").child(key).setValue(newUser2)
+//                    key = database.child("users").push().key!!
+//                    database.child("users").child(key).setValue(newUser3)
+//                    key = database.child("users").push().key!!
+//                    database.child("users").child(key).setValue(newUser4)
 
-                    key = database.child("users").push().key!!
-                    database.child("users").child(key).setValue(newUser1)
-                    key = database.child("users").push().key!!
-                    database.child("users").child(key).setValue(newUser2)
-                    key = database.child("users").push().key!!
-                    database.child("users").child(key).setValue(newUser3)
-                    key = database.child("users").push().key!!
-                    database.child("users").child(key).setValue(newUser4)
+
 
                     //_______________TEST
 
 
                     users.add(newUser)
 
-                    Toast.makeText(this, "Account created.", Toast.LENGTH_LONG).show()
+                    //Create account creation notification
+                    notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+
+                    createNotificationChannel()
+                    val notification = NotificationCompat.Builder(this, "BETRCHANNEL")
+                        .setSmallIcon(android.R.drawable.ic_dialog_info)
+                        //.setContentIntent(pendingIntent)
+                        .setContentTitle("Betr")
+                        .setContentText("Account Successfully Created!")
+                        .setAutoCancel(true)
+                        .build()
+
+                    notificationManager.notify(0, notification)
+
 
                     //Send them to main activity logged in as newUser
                     var intent = Intent(this, MainActivity::class.java)
@@ -94,6 +120,21 @@ class CreateAccount: AppCompatActivity() {
                     startActivity(intent)
                 }
             }
+        }
+
+    }
+
+    private fun createNotificationChannel(){
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+
+            val importance = NotificationManager.IMPO
+
+            val channel = NotificationChannel("BETRCHANNEL", "Betr", importance).apply{
+                description = "Account Creation Notification"
+            }
+            notificationManager.createNotificationChannel(channel)
+
         }
 
     }
