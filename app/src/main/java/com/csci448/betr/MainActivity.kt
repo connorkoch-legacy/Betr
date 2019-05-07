@@ -1,5 +1,6 @@
 package com.csci448.betr
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
@@ -20,6 +21,8 @@ import java.util.*
 class MainActivity : AppCompatActivity() {
 
     private lateinit var drawerLayout: DrawerLayout
+
+    private val ACCOUNT_REQUEST_CODE = 1
 
     companion object {
         //Creates an intent for the MainActivity to be returned to the calling activity or fragment
@@ -105,7 +108,7 @@ class MainActivity : AppCompatActivity() {
                     intent.putParcelableArrayListExtra("FRIEND_LIST", ArrayList(users))
                     intent.putParcelableArrayListExtra("USER_LIST", ArrayList(currentUserFriends))
                     intent.putExtra("LOGGED_IN_USER", currentUser)
-                    startActivity(intent)
+                    startActivityForResult(intent, ACCOUNT_REQUEST_CODE)
                 }
                 R.id.sidebar_make_bet -> {
                     var intent: Intent = FindFriends.newIntent(this)
@@ -168,4 +171,11 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if(requestCode == ACCOUNT_REQUEST_CODE){
+            if(resultCode == Activity.RESULT_OK){
+
+            }
+        }
+    }
 }

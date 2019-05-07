@@ -64,10 +64,9 @@ class CreateAccount: AppCompatActivity() {
                     //TODO: ADD FUNCTIONALITY TO PASS USERS LIST AND CURRENT USER BETWEEN ACTIVITIES
                     val newUser = User(username, password)
 
-                    //Push to database with a random key and newUser as value
-                    var key: String = database.child("users").push().key!!
-                    database.child("users").child(key).setValue(newUser)
-                    Log.d("CreateAccount", key)
+                    //Push to database with username as key
+                    //database.child("users").push(newUser.username)
+                    database.child("users").child(newUser.username).setValue(newUser)
 
                     //_______________TEST
 //                    val newUser1 = User("Roberto", "123")
