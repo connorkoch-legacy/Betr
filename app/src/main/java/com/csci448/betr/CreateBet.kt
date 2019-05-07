@@ -56,10 +56,10 @@ class CreateBet: AppCompatActivity() {
             var userBet:Bet = Bet(tempBetText, currentUser.username, friend, tempBetAmount, sdf.format(cal.time), tempdateEnd)
             var friendBet:Bet = Bet(tempBetText, friend, currentUser.username, tempBetAmount, sdf.format(cal.time), tempdateEnd)
             val tempBetListUser = currentUser.betList.toMutableList()
-            tempBetListUser.add(userBet)
+            tempBetListUser.add(friendBet)
             currentUser.betList = tempBetListUser.toList()
             val tempBetListFriend = friendUser.betList.toMutableList()
-            tempBetListFriend.add(friendBet)
+            tempBetListFriend.add(userBet)
             friendUser.betList = tempBetListFriend.toList()
 
             //push to database
@@ -69,7 +69,7 @@ class CreateBet: AppCompatActivity() {
             //create intent to go back to MainActivity
             var intent = Intent(this, MainActivity::class.java)
             intent.putParcelableArrayListExtra("FRIEND_LIST", ArrayList(users))
-            intent.putParcelableArrayListExtra("USER_LIST", ArrayList(friendsList))
+            //intent.putParcelableArrayListExtra("USER_LIST", ArrayList(friendsList))
             intent.putExtra("LOGGED_IN_USER", currentUser)
             startActivity(intent)
         }
