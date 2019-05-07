@@ -11,7 +11,7 @@ import java.util.*
 @Parcelize
 data class Bet(var betText: String = "", var betCreator: String = "",
                var betAcceptor: String = "", var betAmount: Double = 0.0,
-               var dateStart: String = "", var dateEnd: String = "") : Parcelable, Comparable<Bet> {
+               var dateStart: String = "", var dateEnd: String = "", var winner: String? = null, var accepted: Boolean = false) : Parcelable, Comparable<Bet> {
 
     //This needs to be overridden so a priority queue can order bets by start date
     override fun compareTo(other: Bet): Int {
