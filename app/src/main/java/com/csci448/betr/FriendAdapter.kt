@@ -22,7 +22,6 @@ class FriendAdapter(val user: User, context: Context): RecyclerView.Adapter<Main
     override fun getItemCount(): Int {
         Log.d(LOG_TAG, user.friendList!!.size.toString())
         return user.friendList!!.size
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainAdapter.CustomViewHolder {

@@ -20,6 +20,7 @@ import kotlinx.android.synthetic.main.activity_account_page.*
 import kotlinx.android.synthetic.main.activity_main.*
 import com.google.firebase.database.*
 import java.io.ByteArrayOutputStream
+import java.util.ArrayList
 
 class AccountPage : AppCompatActivity() {
 
@@ -69,7 +70,10 @@ class AccountPage : AppCompatActivity() {
         }
 
         change_pass_button.setOnClickListener{
-            Toast.makeText(baseContext, "Password Changed", Toast.LENGTH_SHORT).show()
+            var intent = Intent(this, ChangePassword::class.java)
+            intent.putParcelableArrayListExtra("USER_LIST", ArrayList(users))
+            intent.putExtra("LOGGED_IN_USER", currentUser)
+            startActivity(intent)
         }
 
         friend_list_button.setOnClickListener{
@@ -78,14 +82,21 @@ class AccountPage : AppCompatActivity() {
             //put extras
             startActivity(intent)
         }
-
     }
 
     //Opens the sidebar when the menu icon in the toolbar is tapped
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
-                onBackPressed()
+//                val returnIntent = Intent()
+//                returnIntent.putParcelableArrayListExtra("USER_LIST", ArrayList(users))
+//                returnIntent.putExtra("LOGGED_IN_USER", currentUser)
+//                setResult(Activity.RESULT_OK, returnIntent)
+                var intent = MainActivity.newIntent(this)
+                intent.putParcelableArrayListExtra("USER_LIST", ArrayList(users))
+                intent.putExtra("LOGGED_IN_USER", currentUser)
+                startActivity(intent)
+
                 return true
             }
             else -> super.onOptionsItemSelected(item)
