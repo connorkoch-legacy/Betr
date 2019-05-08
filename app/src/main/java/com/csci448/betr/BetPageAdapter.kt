@@ -46,35 +46,38 @@ class BetPageAdapter(val active: Activity, val bet: MutableList<Bet>, val itemCl
         var current = 0
         var request = "none"
 
+
+
+        // Following code is to compare the current date with the end date to see if the bet has expired
+        val sdf = SimpleDateFormat("dd/MM/yyyy hh:mm:ss", Locale.US)
+        val cal = Calendar.getInstance()
+        val currentDate = cal.time
+        cal.time = sdf.parse(bet[betCounter].dateEnd)
+        val endDate = cal.time
+
+        // If statement to categorize the type of bets
         // 0: Ongoing
         // 1: Request
         // 2: Finished Need Vote
         // 3: Old Bets
-
-        val sdf = SimpleDateFormat("dd/MM/yyyy hh:mm:ss", Locale.US)
-        val cal = Calendar.getInstance()
-
-        val currentDate = cal.time
-
-        cal.time = sdf.parse(bet[betCounter].dateEnd)
-        val endDate = cal.time
-
-        if (bet[betCounter].winner != null) {
+        if (bet[betCounter].winner != null) { // If the winner field in Bet is set that means this is an old bet
             holder.view.item_imagevie.setImageResource(R.drawable.history_bet)
             current = 3
-            //calleee is less than is negative
-        } else if (endDate.compareTo(currentDate) <= 0) {
+        } else if (endDate.compareTo(currentDate) <= 0) { // If the current date is past the end date of the bet, this bet has ended, need to vote outcome
             holder.view.item_imagevie.setImageResource(R.drawable.complete_bet)
             current = 2
-        } else if (bet[betCounter].accepted == 0) {
+        } else if (bet[betCounter].accepted == 0) { // If the accept field is 0, that means the bet is a request and needs to be accepted
             holder.view.item_imagevie.setImageResource(R.drawable.request_bet)
             current = 1
-        } else if(bet[betCounter].accepted == 1) {
+        } else if(bet[betCounter].accepted == 1) { // If the accept field is 1, this means it has been accepted and that its an on going bet
             holder.view.item_imagevie.setImageResource(R.drawable.ongoing_bet)
             current = 0
         }
 
+        // I used this to store the index of the bet.
+        // I did this because I didn't use callback because we were low on time. This was a quicker fix
         holder.view.temp.text = betCounter.toString()
+
 
         holder.view.betpage_recyclerview_listitem.setOnClickListener {
             //Array
@@ -84,6 +87,7 @@ class BetPageAdapter(val active: Activity, val bet: MutableList<Bet>, val itemCl
             var a = arrayOf<String>(current.toString(), request, holder.view.temp.text.toString())
             itemClick(a)
         }
+
         betCounter++
 
     }

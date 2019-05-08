@@ -31,54 +31,49 @@ class BetPage : AppCompatActivity() {
         var users = mutableListOf<User>()
         var sortedBets = mutableListOf<Bet>()
         var currentUser: User = User()
-        var updateCondition = 0
-
-
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bet_page)
 
+        // Get the list of user and current user from the intents passed in from MainActivity
         users = intent.getParcelableArrayListExtra<User>("USERS_KEY").toMutableList()
         currentUser = intent.getParcelableExtra<User>("CURRENT_USER_KEY")
+        // Clear lists everytime this activity is created
         var currentUserFriends: MutableList<User> = mutableListOf()
         sortedBets = mutableListOf()
 
-        updateCondition = intent.getIntExtra("DB_UPDATE", 0)
-
-        if(updateCondition == 1){ //request update
-
-        }else if(updateCondition == 2){ //finished bet update
-
-        }
-
-        Log.d(LOG_TAG, currentUser.username)
-
-        //do some preprocessing to get all users in currentUser's friend list
+        // Do some preprocessing to get all users in currentUser's friend list
         for(friendStr in currentUser.friendList){
             for(u in users){
                 if(friendStr == u.username) currentUserFriends.add(u)
             }
         }
 
+        // Sort the list of bets from the current user
         for(bet in currentUser.betList) {
             sortedBets.add(bet)
         }
 
+        // Creates the recycler view. The recycler view returns an Array of strings with information I needed
+        // I could have used callbacks to do this part, but I only needed a single int so I decided trying to get callbacks to work wouldn't be worth it (time crunch)
         betpage_recyclerview.layoutManager = LinearLayoutManager(this)
         betpage_recyclerview.adapter = BetPageAdapter(this, sortedBets) {
 
+            // it[0] gives us the type of bet, it[2] gives us the index so we know which bet to change
+            // Depending on type, the next activity is called
             if( it[0] == "0"){
                 Log.d(LOG_TAG, "Ongoing")
+
                 var intent = Intent(this, OngoingBet::class.java)
                 intent.putParcelableArrayListExtra("USER_LIST", ArrayList(users))
                 intent.putExtra("LOGGED_IN_USER", currentUser)
                 intent.putExtra("INDEX", it[2])
                 startActivity(intent)
             }else if(it[0] == "1"){
-                //REQUEST
+                Log.d(LOG_TAG, "Request")
+
                 var intent = Intent(this, RequestBet::class.java)
                 intent.putParcelableArrayListExtra("USER_LIST", ArrayList(users))
                 intent.putExtra("LOGGED_IN_USER", currentUser)
@@ -86,24 +81,21 @@ class BetPage : AppCompatActivity() {
                 startActivity(intent)
             }else if(it[0] == "2"){
                 Log.d(LOG_TAG, "Finished, Vote")
+
                 var intent = Intent(this, FinishedBet::class.java)
                 intent.putParcelableArrayListExtra("USER_LIST", ArrayList(users))
                 intent.putExtra("LOGGED_IN_USER", currentUser)
                 intent.putExtra("INDEX", it[2])
                 startActivity(intent)
             }else{
-                Log.d(LOG_TAG, "Ongoing")
+                Log.d(LOG_TAG, "Old Bet")
+
                 var intent = Intent(this, old_bet::class.java)
                 intent.putParcelableArrayListExtra("USER_LIST", ArrayList(users))
                 intent.putExtra("LOGGED_IN_USER", currentUser)
                 intent.putExtra("INDEX", it[2])
                 startActivity(intent)
             }
-
-            Log.d(LOG_TAG, it[0])
-            Log.d(LOG_TAG, it[1])
-            Log.d(LOG_TAG, it[2])
-
         }
 
         val toolbar: Toolbar = findViewById(R.id.toolbar_bets)
@@ -128,8 +120,8 @@ class BetPage : AppCompatActivity() {
         return true
     }
 
+    //Override the backpressed function so that it sends the updated bets back properly
     override fun onBackPressed() {
-        Log.d(LOG_TAG,"REVERSO")
         var intent = Intent(this, MainActivity::class.java)
         intent.putParcelableArrayListExtra("USER_LIST", ArrayList(users))
         intent.putExtra("LOGGED_IN_USER", currentUser)

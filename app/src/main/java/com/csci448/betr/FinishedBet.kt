@@ -26,6 +26,7 @@ class FinishedBet : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.finished_bet_display_page)
 
+        // Get values passed in from intents
         users = intent.getParcelableArrayListExtra<User>("USER_LIST").toMutableList()
         currentUser = intent.getParcelableExtra<User>("LOGGED_IN_USER")
         sortedBets = mutableListOf()
@@ -35,6 +36,7 @@ class FinishedBet : AppCompatActivity() {
             sortedBets.add(bet)
         }
 
+        // Update text field with the passed in intent values
         title_witle.text = sortedBets[index].betText
         bet_amount.text = "Bet Amount: ${sortedBets[index].betAmount.toString()}"
         participants.text = "Participants: ${sortedBets[index].betCreator.toString()} and ${sortedBets[index].betAcceptor.toString()}"
@@ -49,16 +51,20 @@ class FinishedBet : AppCompatActivity() {
             startActivity(intent)
         }
 
+        // If the user selects this option (the bet creator), he is the winner of the bet
         option_1.setOnClickListener {
+            //Change the winner to the creator
             sortedBets[index].winner = sortedBets[index].betCreator
-            var otherDude = sortedBets[index].betCreator
+            var otherDude = sortedBets[index].betCreator// The bet effects two people, so two users in the users list must be updated
             for(a in users){
+                //This if block handles updating the database and intent for the current user
                 if(a.username == currentUser.username){
                     a.betList = sortedBets
                     currentUser.betList = sortedBets
                     database.child("users").child(a.username).setValue(a)
                     database.child("users").child(currentUser.username).setValue(currentUser)
                 }
+                //This if block handles updating the database for the other person this bet effects
                 if(a.username == otherDude){
                     a.betList = sortedBets
                     database.child("users").child(a.username).setValue(a)
@@ -66,16 +72,20 @@ class FinishedBet : AppCompatActivity() {
             }
         }
 
+        // If the user selects this option (the bet acceptor), he is the winner of the bet
         option_2.setOnClickListener {
+            //Change the winner to the acceptor
             sortedBets[index].winner = sortedBets[index].betAcceptor
-            var otherDude = sortedBets[index].betCreator
+            var otherDude = sortedBets[index].betCreator // The bet effects two people, so two users in the users list must be updated
             for(a in users){
+                //This if block handles updating the database and intent for the current user
                 if(a.username == currentUser.username){
                     a.betList = sortedBets
                     currentUser.betList = sortedBets
                     database.child("users").child(a.username).setValue(a)
                     database.child("users").child(currentUser.username).setValue(currentUser)
                 }
+                //This if block handles updating the database for the other person this bet effects
                 if(a.username == otherDude){
                     a.betList = sortedBets
                     database.child("users").child(a.username).setValue(a)
