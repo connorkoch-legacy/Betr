@@ -50,14 +50,6 @@ class BetPage : AppCompatActivity() {
 
         for(bet in currentUser.betList) {
             sortedBets.add(bet)
-//            Log.d(LOG_TAG, bet.betText)
-//            Log.d(LOG_TAG, bet.betCreator)
-//            Log.d(LOG_TAG, bet.betAcceptor)
-//            Log.d(LOG_TAG, bet.betAmount.toString())
-//            Log.d(LOG_TAG, bet.dateStart)
-//            Log.d(LOG_TAG, bet.dateEnd)
-//            Log.d(LOG_TAG, bet.accepted.toString())
-//            Log.d(LOG_TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
         }
 
         betpage_recyclerview.layoutManager = LinearLayoutManager(this)

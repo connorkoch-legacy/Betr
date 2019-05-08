@@ -25,6 +25,7 @@ class RequestBet : AppCompatActivity() {
 
         users = intent.getParcelableArrayListExtra<User>("USER_LIST").toMutableList()
         currentUser = intent.getParcelableExtra<User>("LOGGED_IN_USER")
+        sortedBets = mutableListOf()
         var index = intent.getStringExtra("INDEX").toInt()
 
         for(bet in currentUser.betList) {
@@ -56,15 +57,26 @@ class RequestBet : AppCompatActivity() {
             accept_buttonee.visibility = View.INVISIBLE
             decline_buttonee.visibility = View.INVISIBLE
             sortedBets.remove(sortedBets[index])
-            sortedBets[index].accepted = 2
             for(a in users){
                 if(a.username == currentUser.username){
                     a.betList = sortedBets
                     currentUser.betList = sortedBets
+                    break
                 }
             }
         }
     }
+
+    //TODO: CONNOR ADD DATABSE LINE HERE DUDE @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    //TODO; @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    //TODO; @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    fun updateDatabase(){
+
+    }
+    //TODO; @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    //TODO; @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    //TODO; @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
 
     override fun onBackPressed() {
         super.onBackPressed()
