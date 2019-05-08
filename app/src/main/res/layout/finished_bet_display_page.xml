@@ -4,8 +4,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_marginHorizontal="30dp"
->
+        android:layout_marginHorizontal="30dp">
 
     <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
@@ -23,6 +22,7 @@
     </android.support.v7.widget.Toolbar>
 
     <TextView
+            android:id="@+id/title_witle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="TITLE OF BET"
@@ -38,71 +38,8 @@
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_marginVertical="20dp">
-
-        <LinearLayout
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-            <TextView
-                    android:id="@+id/outcome1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="OUTCOME 1:"
-                    android:textColor="#000"
-            />
-
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="I BET YOU STARTED THIS PROJECT LAST NIGHT"
-                    android:textColor="#000"
-            />
-
-        </LinearLayout>
-
-        <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/outcome1"
-                android:text="vote"/>
-
-    </LinearLayout>
-    <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginVertical="20dp">
-
-        <LinearLayout
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-            <TextView
-                    android:id="@+id/outcome2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="OUTCOME 1:"
-                    android:textColor="#000"
-            />
-
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="YOU STARTED THIS PROJECT A WEEK EARLY"
-                    android:textColor="#000"
-            />
-
-        </LinearLayout>
-
-        <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/outcome1"
-                android:text="vote"/>
 
     </LinearLayout>
 
@@ -113,18 +50,30 @@
             android:layout_marginVertical="20dp">
 
         <TextView
+                android:id="@+id/bet_amount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="POT:"
-                android:textColor="#000"
-        />
+                android:text="POT:"/>
+
+        <TextView
+                android:id="@+id/participants"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="POT:"/>
 
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="$500"
-                android:textColor="#000"
-        />
+                android:text="Vote on a winner"/>
+
+        <Button
+                android:id="@+id/option_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        <Button
+                android:id="@+id/option_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
 
     </LinearLayout>
 

@@ -27,6 +27,7 @@ class BetPage : AppCompatActivity() {
         var users = mutableListOf<User>()
         var sortedBets = mutableListOf<Bet>()
         var currentUser: User = User()
+        var updateCondition = 0
 
     }
 
@@ -38,6 +39,14 @@ class BetPage : AppCompatActivity() {
         currentUser = intent.getParcelableExtra<User>("CURRENT_USER_KEY")
         var currentUserFriends: MutableList<User> = mutableListOf()
         sortedBets = mutableListOf()
+
+        updateCondition = intent.getIntExtra("DB_UPDATE", 0)
+
+        if(updateCondition == 1){ //request update
+            
+        }else if(updateCondition == 2){ //finished bet update
+
+        }
 
         Log.d(LOG_TAG, currentUser.username)
 
@@ -58,6 +67,9 @@ class BetPage : AppCompatActivity() {
             if( it[0] == "0"){
                 Log.d(LOG_TAG, "Ongoing")
                 var intent = Intent(this, OngoingBet::class.java)
+                intent.putParcelableArrayListExtra("USER_LIST", ArrayList(users))
+                intent.putExtra("LOGGED_IN_USER", currentUser)
+                intent.putExtra("INDEX", it[2])
                 startActivity(intent)
             }else if(it[0] == "1"){
                 //REQUEST
@@ -69,10 +81,16 @@ class BetPage : AppCompatActivity() {
             }else if(it[0] == "2"){
                 Log.d(LOG_TAG, "Finished, Vote")
                 var intent = Intent(this, FinishedBet::class.java)
+                intent.putParcelableArrayListExtra("USER_LIST", ArrayList(users))
+                intent.putExtra("LOGGED_IN_USER", currentUser)
+                intent.putExtra("INDEX", it[2])
                 startActivity(intent)
             }else{
                 Log.d(LOG_TAG, "Ongoing")
                 var intent = Intent(this, OngoingBet::class.java)
+                intent.putParcelableArrayListExtra("USER_LIST", ArrayList(users))
+                intent.putExtra("LOGGED_IN_USER", currentUser)
+                intent.putExtra("INDEX", it[2])
                 startActivity(intent)
             }
 

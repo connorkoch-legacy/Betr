@@ -35,6 +35,13 @@
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:background="#000000"/>
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginVertical="20dp">
+
+    </LinearLayout>
 
     <LinearLayout
             android:layout_width="match_parent"
@@ -42,33 +49,22 @@
             android:orientation="vertical"
             android:layout_marginVertical="20dp">
 
-
         <TextView
                 android:id="@+id/bet_amount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="BET AMOUNT: "
-                android:textColor="#000"
-        />
+                android:text="POT:"/>
 
         <TextView
-                android:id="@+id/bet_requestor"
+                android:id="@+id/participants"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="BET AMOUNT: "
-                android:textColor="#000"
-        />
-
-        <Button
-                android:id = "@+id/accept_buttonee"
-                android:layout_width="wrap_content"
+                android:text="POT:"/>
+        <TextView
+                android:id="@+id/winner"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="accept"/>
-        <Button
-                android:id = "@+id/decline_buttonee"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="decline"/>
+                android:text="POT:"/>
 
     </LinearLayout>
 

@@ -68,35 +68,6 @@ class BetPageAdapter(val active: Activity, val bet: MutableList<Bet>, val itemCl
             current = 2
         } else if (bet[betCounter].accepted == 0) {
             holder.view.item_imagevie.setImageResource(R.drawable.request_bet)
-//            holder.view.accept_button.visibility = View.VISIBLE
-//            holder.view.decline_button.visibility = View.VISIBLE
-//            holder.view.accept_button.setOnClickListener {
-//                Log.d(LOG_TAG, "Accepted lol")
-//
-//                holder.view.item_imagevie.setImageResource(R.drawable.ongoing_bet)
-//                holder.view.accept_button.visibility = View.INVISIBLE
-//                holder.view.decline_button.visibility = View.INVISIBLE
-//
-//                request = "true"
-//
-//                var texty = holder.view.temp.text.toString()
-//                Log.d(LOG_TAG, texty)
-//                bet[texty.toInt()].accepted = true
-//
-//            }
-//            holder.view.decline_button.setOnClickListener {
-//                Log.d(LOG_TAG, "Declined lol")
-//
-//                holder.view.item_imagevie.setImageResource(0)
-//
-//                holder.view.accept_button.visibility = View.INVISIBLE
-//                holder.view.decline_button.visibility = View.INVISIBLE
-//                holder.view.item_textview.visibility = View.INVISIBLE
-//
-//                //delete from database
-//                request = "false"
-//
-//            }
             current = 1
         } else if(bet[betCounter].accepted == 1) {
             holder.view.item_imagevie.setImageResource(R.drawable.ongoing_bet)

@@ -32,6 +32,10 @@ class RequestBet : AppCompatActivity() {
             sortedBets.add(bet)
         }
 
+        title_witle.text = sortedBets[index].betText
+        bet_amount.text = "Bet Amount: ${sortedBets[index].betAmount.toString()}"
+        bet_requestor.text = "Bet Creator: ${sortedBets[index].betCreator.toString()}"
+
         back_button.setOnClickListener {
             var intent = Intent(this, MainActivity::class.java)
             intent.putParcelableArrayListExtra("USER_LIST", ArrayList(users))
