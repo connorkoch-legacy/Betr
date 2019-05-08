@@ -3,12 +3,15 @@ package com.csci448.betr
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.support.design.widget.NavigationView
+import android.support.v4.app.ActivityCompat
+import android.support.v4.content.ContextCompat
 import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBar
@@ -21,6 +24,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import com.google.firebase.database.*
 import java.io.ByteArrayOutputStream
 import java.util.ArrayList
+import java.util.jar.Manifest
 
 class AccountPage : AppCompatActivity() {
 
@@ -63,9 +67,14 @@ class AccountPage : AppCompatActivity() {
         }
 
         profile_picture.setOnClickListener{
-            val callCameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-            if(callCameraIntent.resolveActivity(packageManager) != null){
-                startActivityForResult(callCameraIntent, CAMERA_REQUEST_CODE)
+            val permission = ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA)
+            if(permission == PackageManager.PERMISSION_GRANTED) {
+                val callCameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                if (callCameraIntent.resolveActivity(packageManager) != null) {
+                    startActivityForResult(callCameraIntent, CAMERA_REQUEST_CODE)
+                }
+            } else {
+                ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.CAMERA), 101)
             }
         }
 
