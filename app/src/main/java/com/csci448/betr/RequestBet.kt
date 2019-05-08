@@ -4,9 +4,13 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_request_bet.*
 
 class RequestBet : AppCompatActivity() {
+
+    private var database: DatabaseReference = FirebaseDatabase.getInstance().reference
 
     companion object {
         //Creates an intent for the OptionsActivity to be returned to the calling activity or fragment
@@ -49,6 +53,10 @@ class RequestBet : AppCompatActivity() {
                 if(a.username == currentUser.username){
                     a.betList = sortedBets
                     currentUser.betList = sortedBets
+
+                    database.child("users").child(a.username).setValue(a)
+                    database.child("users").child(currentUser.username).setValue(currentUser)
+                    break
                 }
             }
         }
@@ -61,6 +69,9 @@ class RequestBet : AppCompatActivity() {
                 if(a.username == currentUser.username){
                     a.betList = sortedBets
                     currentUser.betList = sortedBets
+
+                    database.child("users").child(a.username).setValue(a)
+                    database.child("users").child(currentUser.username).setValue(currentUser)
                     break
                 }
             }
