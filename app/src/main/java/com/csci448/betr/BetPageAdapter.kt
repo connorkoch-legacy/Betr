@@ -31,6 +31,7 @@ class BetPageAdapter(val active: Activity, val bet: MutableList<Bet>, val itemCl
         )
     }
 
+
     override fun onBindViewHolder(holder: MainAdapter.CustomViewHolder, position: Int) {
 
         holder.view.item_textview.text = bet[betCounter].betText

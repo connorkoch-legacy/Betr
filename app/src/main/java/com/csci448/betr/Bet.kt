@@ -25,6 +25,6 @@ data class Bet(var betText: String = "", var betCreator: String = "",
         var dateStartOther = cal.time
 
         //should order start dates from new to old
-        return dateStartOther.compareTo(dateStartThis)
+        return dateStartThis.compareTo(dateStartOther)
     }
 }
