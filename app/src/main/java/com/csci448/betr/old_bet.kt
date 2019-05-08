@@ -21,6 +21,7 @@ class old_bet : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_old_bet)
 
+        // Gets information passed in by the intent
         users = intent.getParcelableArrayListExtra<User>("USER_LIST").toMutableList()
         currentUser = intent.getParcelableExtra<User>("LOGGED_IN_USER")
         sortedBets = mutableListOf()
@@ -30,6 +31,7 @@ class old_bet : AppCompatActivity() {
             sortedBets.add(bet)
         }
 
+        //Updates text fields with the passed in intent values
         title_witle.text = sortedBets[index].betText
         bet_amount.text = "Bet Amount: ${sortedBets[index].betAmount.toString()}"
         participants.text = "Participants: ${sortedBets[index].betCreator.toString()} and ${sortedBets[index].betAcceptor.toString()}"

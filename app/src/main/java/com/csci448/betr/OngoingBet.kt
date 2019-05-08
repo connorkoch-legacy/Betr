@@ -23,18 +23,22 @@ class OngoingBet : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.ongoing_bet_display_page)
 
+        // Gets all the values pass from the intent
         users = intent.getParcelableArrayListExtra<User>("USER_LIST").toMutableList()
         currentUser = intent.getParcelableExtra<User>("LOGGED_IN_USER")
         sortedBets = mutableListOf()
         var index = intent.getStringExtra("INDEX").toInt()
 
+        // Sorts the bets
         for(bet in currentUser.betList) {
             sortedBets.add(bet)
         }
 
+        //Set the different text values to the information given from the intent
         title_witle.text = sortedBets[index].betText
         bet_amount.text = "Bet Amount: ${sortedBets[index].betAmount.toString()}"
         participants.text = "Participants: ${sortedBets[index].betCreator.toString()} and ${sortedBets[index].betAcceptor.toString()}"
+
 
         back_button.setOnClickListener {
             var intent = Intent(this, MainActivity::class.java)
