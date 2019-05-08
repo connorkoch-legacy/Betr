@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginHorizontal="30dp">
+
+    <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
+
+        <ImageButton
+                android:id="@+id/back_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="?android:attr/homeAsUpIndicator"/>
+
+    </android.support.v7.widget.Toolbar>
+
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TITLE OF BET"
+            android:gravity="center"
+            android:textSize="24dp"
+            android:textColor="#000"
+    />
+
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#000000"/>
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginVertical="20dp">
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="OUTCOME:"
+                android:textColor="#000"
+        />
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="I BET YOU STARTED THIS PROJECT LAST NIGHT"
+                android:textColor="#000"
+        />
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginVertical="20dp">
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="POT:"/>
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="$500"
+                android:textColor="#000"
+        />
+
+        <Button
+                android:id = "@+id/accept_buttonee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="accept"/>
+        <Button
+                android:id = "@+id/decline_buttonee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="decline"/>
+
+    </LinearLayout>
+
+</LinearLayout>

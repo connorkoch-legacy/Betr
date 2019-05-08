@@ -26,9 +26,7 @@ class BetPage : AppCompatActivity() {
 
         var users = mutableListOf<User>()
         var sortedBets = mutableListOf<Bet>()
-        var newBetList = mutableListOf<Bet>()
-
-        var newbet = false
+        var currentUser: User = User()
 
     }
 
@@ -37,7 +35,7 @@ class BetPage : AppCompatActivity() {
         setContentView(R.layout.activity_bet_page)
 
         users = intent.getParcelableArrayListExtra<User>("USERS_KEY").toMutableList()
-        var currentUser = intent.getParcelableExtra<User>("CURRENT_USER_KEY")
+        currentUser = intent.getParcelableExtra<User>("CURRENT_USER_KEY")
         var currentUserFriends: MutableList<User> = mutableListOf()
         sortedBets = mutableListOf()
 
@@ -62,38 +60,6 @@ class BetPage : AppCompatActivity() {
 //            Log.d(LOG_TAG, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
         }
 
-        //TODO: REPLACE THESE EXAMPLE USERS WITH REAL USERS WHEN YOU FIGURE OUT HOW TO WORK THE DATABASE
-        //TODO: @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-//        val tempUser = User("Test User", "pass")
-//        val tempFriend = User("Friend 1", "pass1")
-//        val tempFriend2 = User("Friend 2", "pass2")
-//        var userFriendList = mutableListOf<String>(tempFriend.username, tempFriend2.username)
-//        var friendFriendList = mutableListOf<String>(tempFriend2.username)
-//        tempUser.friendList = userFriendList
-//        tempFriend.friendList = friendFriendList
-//
-//        var userBet = Bet("I bet that the moon is cheese", tempUser.username, tempFriend.username, 100.00)
-//        var friendBet = Bet("I bet that dogs are bigger than cats", tempFriend.username, tempFriend2.username, 17.8932)
-//        var userBetList = mutableListOf<Bet>(userBet, friendBet)
-//        var friendBetList = mutableListOf<Bet>(friendBet)
-//        tempUser.betList = userBetList
-//        tempFriend.betList = userBetList
-//        tempFriend2.betList = friendBetList
-//
-//        betpage_recyclerview.layoutManager = LinearLayoutManager(this)
-//        betpage_recyclerview.adapter = BetPageAdapter(this, tempUser) {
-//            if( it == 0){
-//                var intent = Intent(this, FinishedBet::class.java)
-//                startActivity(intent)
-//            }else if(it == 1){
-//                var intent = Intent(this, OngoingBet::class.java)
-//                startActivity(intent)
-//            }else{
-////                var intent = Intent(this, MainActivity::class.java)
-////                startActivity(intent)
-//            }
-//        }
-
         betpage_recyclerview.layoutManager = LinearLayoutManager(this)
         betpage_recyclerview.adapter = BetPageAdapter(this, sortedBets) {
 
@@ -102,20 +68,12 @@ class BetPage : AppCompatActivity() {
                 var intent = Intent(this, OngoingBet::class.java)
                 startActivity(intent)
             }else if(it[0] == "1"){
-                Log.d(LOG_TAG, "Request")
-                if(it[1] == "true"){
-                    var count = 0
-                    for(b in sortedBets){
-                        if(count == it[2].toInt()){
-                            //skip
-                            it[2] = "0"
-                        }else{
-                            newBetList.add(count, b)
-                            count++
-                        }
-                    }
-                    newbet = true
-                }
+                //REQUEST
+                var intent = Intent(this, RequestBet::class.java)
+                intent.putParcelableArrayListExtra("USER_LIST", ArrayList(users))
+                intent.putExtra("LOGGED_IN_USER", currentUser)
+                intent.putExtra("INDEX", it[2])
+                startActivity(intent)
             }else if(it[0] == "2"){
                 Log.d(LOG_TAG, "Finished, Vote")
                 var intent = Intent(this, FinishedBet::class.java)
@@ -131,7 +89,6 @@ class BetPage : AppCompatActivity() {
             Log.d(LOG_TAG, it[2])
 
         }
-
 
         val toolbar: Toolbar = findViewById(R.id.toolbar_bets)
         setSupportActionBar(toolbar)
@@ -156,16 +113,14 @@ class BetPage : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        super.onBackPressed()
         Log.d(LOG_TAG,"REVERSO")
-        if(newbet){
-            var intent = Intent(this, MainActivity::class.java)
+        var intent = Intent(this, MainActivity::class.java)
+        intent.putParcelableArrayListExtra("USER_LIST", ArrayList(users))
+        intent.putExtra("LOGGED_IN_USER", currentUser)
 
-            intent.putParcelableArrayListExtra("USER_LIST", ArrayList(users))
-            intent.putExtra("LOGGED_IN_USER", intent.getParcelableExtra<User>("CURRENT_USER_KEY"))
+        startActivity(intent)
+        super.onBackPressed()
 
-            startActivity(intent)
-        }
     }
 
 
