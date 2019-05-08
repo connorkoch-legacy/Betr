@@ -27,6 +27,7 @@ class MainAdapter(val user: User, val sortedBets: MutableList<Bet>, var meOrFrie
     }
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
+        //Sets the values of the cell item based on the users participating in the bet
         var userName1: String = ""
         var userName2: String = ""
         var currentBet: Bet? = null
@@ -44,8 +45,10 @@ class MainAdapter(val user: User, val sortedBets: MutableList<Bet>, var meOrFrie
         holder.view.item_textview_1.text = "$userName1 bet $userName2:"
         holder.view.item_textview_2.text = "\t" + currentBet?.betText
         holder.view.item_textview_3.text = "$" + "%.2f".format(currentBet?.betAmount)
+
         //set the profle pic if it's not null, else it's default
         if(user.profilePic != "") {
+            for()
             val imageBytes = Base64.decode(user.profilePic, 0)
             val image = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
 
