@@ -56,7 +56,7 @@ class CreateBet: AppCompatActivity() {
 
             //update bet list of current user and friend
             var userBet:Bet = Bet(tempBetText, currentUser.username, friend, tempBetAmount, sdf.format(calStart.time), sdf.format(calEnd.time))
-            var friendBet:Bet = Bet(tempBetText, friend, currentUser.username, tempBetAmount, sdf.format(calStart.time), sdf.format(calEnd.time))
+            var friendBet:Bet = Bet(tempBetText, friend, currentUser.username, tempBetAmount, sdf.format(calStart.time), sdf.format(calEnd.time),null,1)
             val tempBetListUser = currentUser.betList.toMutableList()
             tempBetListUser.add(friendBet)
             currentUser.betList = tempBetListUser.toList()

@@ -3,9 +3,13 @@ package com.csci448.betr
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.finished_bet_display_page.*
 
 class FinishedBet : AppCompatActivity() {
+
+    private var database: DatabaseReference = FirebaseDatabase.getInstance().reference
 
     companion object {
         //Creates an intent for the OptionsActivity to be returned to the calling activity or fragment
@@ -20,7 +24,7 @@ class FinishedBet : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_old_bet)
+        setContentView(R.layout.finished_bet_display_page)
 
         users = intent.getParcelableArrayListExtra<User>("USER_LIST").toMutableList()
         currentUser = intent.getParcelableExtra<User>("LOGGED_IN_USER")
@@ -47,22 +51,34 @@ class FinishedBet : AppCompatActivity() {
 
         option_1.setOnClickListener {
             sortedBets[index].winner = sortedBets[index].betCreator
+            var otherDude = sortedBets[index].betCreator
             for(a in users){
                 if(a.username == currentUser.username){
                     a.betList = sortedBets
                     currentUser.betList = sortedBets
-                    break
+                    database.child("users").child(a.username).setValue(a)
+                    database.child("users").child(currentUser.username).setValue(currentUser)
+                }
+                if(a.username == otherDude){
+                    a.betList = sortedBets
+                    database.child("users").child(a.username).setValue(a)
                 }
             }
         }
 
         option_2.setOnClickListener {
             sortedBets[index].winner = sortedBets[index].betAcceptor
+            var otherDude = sortedBets[index].betCreator
             for(a in users){
                 if(a.username == currentUser.username){
                     a.betList = sortedBets
                     currentUser.betList = sortedBets
-                    break
+                    database.child("users").child(a.username).setValue(a)
+                    database.child("users").child(currentUser.username).setValue(currentUser)
+                }
+                if(a.username == otherDude){
+                    a.betList = sortedBets
+                    database.child("users").child(a.username).setValue(a)
                 }
             }
         }
