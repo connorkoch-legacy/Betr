@@ -17,6 +17,7 @@ import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
+import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
 
@@ -103,8 +104,8 @@ class MainActivity : AppCompatActivity() {
             //create ongoingbets intent
             var intent = BetPage.newIntent(this)
             //put extras
-            intent.putExtra("USERS_KEY", this.intent.getParcelableArrayListExtra<User>("USER_LIST"))
-            intent.putExtra("CURRENT_USER_KEY", this.intent.getParcelableExtra<User>("LOGGED_IN_USER"))
+            intent.putParcelableArrayListExtra("USERS_KEY", ArrayList(users))
+            intent.putExtra("CURRENT_USER_KEY", currentUser)
             startActivity(intent)
         }
 
