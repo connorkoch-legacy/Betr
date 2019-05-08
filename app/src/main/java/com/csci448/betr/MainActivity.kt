@@ -55,20 +55,11 @@ class MainActivity : AppCompatActivity() {
 
         //temp bets for testing
         val sdf = SimpleDateFormat("dd/MM/yyyy hh:mm:ss", Locale.US)
-//        val cal = Calendar.getInstance()
-//        cal.add(Calendar.DAY_OF_YEAR, 2)
-//        var userBet3 = Bet("Should be last", currentUser.username, "Craig", 100.00, sdf.format(cal.time), sdf.format(cal.time))
-//        cal.add(Calendar.DAY_OF_YEAR, -4)
-//        var userBet = Bet("I bet that the moon is cheese", currentUser.username, "Doug", 49.00, sdf.format(cal.time), sdf.format(cal.time))
-//        cal.add(Calendar.DAY_OF_YEAR, -10)
-//        var userBet2 = Bet("Should be first", currentUser.username, "Stan", 5.00, sdf.format(cal.time), sdf.format(cal.time))
-
-        //currentUser.betList = mutableListOf(userBet, userBet2, userBet3)
-
+        val cal = Calendar.getInstance()
 
         if(!me_toggle_button.isChecked) {
             for(bet in currentUser.betList) {
-                sortedBets.add(bet)
+                if(bet.accepted == 1) sortedBets.add(bet)
             }
         }
         else { //Or "Friends" tab is selected, get bets from friends
@@ -76,7 +67,9 @@ class MainActivity : AppCompatActivity() {
                 for(j in 0 until currentUserFriends[i].betList.size){
                     if(currentUserFriends[i].betList[j].betAcceptor != currentUser.username &&
                         currentUserFriends[i].betList[j].betCreator != currentUser.username) {
-                        sortedBets.add(currentUserFriends[i].betList[j])
+                        if(currentUserFriends[i].betList[j].accepted == 1) {
+                            sortedBets.add(currentUserFriends[i].betList[j])
+                        }
                     }
                 }
             }
@@ -152,7 +145,7 @@ class MainActivity : AppCompatActivity() {
         me_toggle_button.setOnClickListener {
             sortedBets.clear()
             for(bet in currentUser.betList) {
-                sortedBets.add(bet)
+                if(bet.accepted == 1) sortedBets.add(bet)
             }
             sortedBets.sortBy{ sdf.parse(it.dateStart) }
             if(!me_toggle_button.isChecked) main_recyclerview.adapter = MainAdapter(currentUser, sortedBets, 0)
@@ -168,7 +161,7 @@ class MainActivity : AppCompatActivity() {
                 for(j in 0 until currentUserFriends[i].betList.size){
                     if(currentUserFriends[i].betList[j].betAcceptor != currentUser.username &&
                             currentUserFriends[i].betList[j].betCreator != currentUser.username) {
-                        sortedBets.add(currentUserFriends[i].betList[j])
+                        if(currentUserFriends[i].betList[j].accepted == 1)sortedBets.add(currentUserFriends[i].betList[j])
                     }
                 }
             }
