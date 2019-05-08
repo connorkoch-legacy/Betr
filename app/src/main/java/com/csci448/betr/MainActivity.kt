@@ -42,10 +42,13 @@ class MainActivity : AppCompatActivity() {
         var sortedBets: MutableList<Bet> = mutableListOf()
 
         //do some preprocessing to get all users in currentUser's friend list
+        currentUserFriends.clear()
         for(friendStr in currentUser.friendList){
             for(u in users){
-                if(friendStr == u.username) currentUserFriends.add(u)
-                break
+                if(friendStr == u.username) {
+                    currentUserFriends.add(u)
+                    break
+                }
             }
         }
 
@@ -70,7 +73,10 @@ class MainActivity : AppCompatActivity() {
         else { //Or "Friends" tab is selected, get bets from friends
             for(i in 0 until currentUserFriends.size) {
                 for(j in 0 until currentUserFriends[i].betList.size){
-                    sortedBets.add(currentUserFriends[i].betList[j])
+                    if(currentUserFriends[i].betList[j].betAcceptor != currentUser.username &&
+                        currentUserFriends[i].betList[j].betCreator != currentUser.username) {
+                        sortedBets.add(currentUserFriends[i].betList[j])
+                    }
                 }
             }
         }
@@ -108,15 +114,22 @@ class MainActivity : AppCompatActivity() {
             when(menuItem.itemId) {
                 R.id.sidebar_account -> {
                     var intent: Intent = AccountPage.newIntent(this)
-                    intent.putParcelableArrayListExtra("FRIEND_LIST", ArrayList(users))
-                    intent.putParcelableArrayListExtra("USER_LIST", ArrayList(currentUserFriends))
+                    intent.putParcelableArrayListExtra("FRIEND_LIST", ArrayList(currentUserFriends))
+                    intent.putParcelableArrayListExtra("USER_LIST", ArrayList(users))
                     intent.putExtra("LOGGED_IN_USER", currentUser)
-                    startActivityForResult(intent, ACCOUNT_REQUEST_CODE)
+                    startActivity(intent)
                 }
                 R.id.sidebar_make_bet -> {
                     var intent: Intent = FindFriends.newIntent(this)
-                    intent.putParcelableArrayListExtra("FRIEND_LIST", ArrayList(users))
-                    intent.putParcelableArrayListExtra("USER_LIST", ArrayList(currentUserFriends))
+                    intent.putParcelableArrayListExtra("FRIEND_LIST", ArrayList(currentUserFriends))
+                    intent.putParcelableArrayListExtra("USER_LIST", ArrayList(users))
+                    intent.putExtra("LOGGED_IN_USER", currentUser)
+                    startActivity(intent)
+                }
+                R.id.sidebar_add_friend -> {
+                    var intent: Intent = Intent(this, AddFriend::class.java)
+                    intent.putParcelableArrayListExtra("FRIEND_LIST", ArrayList(currentUserFriends))
+                    intent.putParcelableArrayListExtra("USER_LIST", ArrayList(users))
                     intent.putExtra("LOGGED_IN_USER", currentUser)
                     startActivity(intent)
                 }
@@ -129,8 +142,8 @@ class MainActivity : AppCompatActivity() {
 
         fab.setOnClickListener {
             var intent = Intent(this, FindFriends::class.java)
-            intent.putParcelableArrayListExtra("FRIEND_LIST", ArrayList(users))
-            intent.putParcelableArrayListExtra("USER_LIST", ArrayList(currentUserFriends))
+            intent.putParcelableArrayListExtra("FRIEND_LIST", ArrayList(currentUserFriends))
+            intent.putParcelableArrayListExtra("USER_LIST", ArrayList(users))
             intent.putExtra("LOGGED_IN_USER", currentUser)
             startActivity(intent)
         }
@@ -140,6 +153,7 @@ class MainActivity : AppCompatActivity() {
             for(bet in currentUser.betList) {
                 sortedBets.add(bet)
             }
+            sortedBets.sortBy{ sdf.parse(it.dateStart) }
             if(!me_toggle_button.isChecked) main_recyclerview.adapter = MainAdapter(currentUser, sortedBets, 0)
 
 
@@ -151,9 +165,13 @@ class MainActivity : AppCompatActivity() {
             sortedBets.clear()
             for(i in 0 until currentUserFriends.size) {
                 for(j in 0 until currentUserFriends[i].betList.size){
-                    sortedBets.add(currentUserFriends[i].betList[j])
+                    if(currentUserFriends[i].betList[j].betAcceptor != currentUser.username &&
+                            currentUserFriends[i].betList[j].betCreator != currentUser.username) {
+                        sortedBets.add(currentUserFriends[i].betList[j])
+                    }
                 }
             }
+            sortedBets.sortBy{ sdf.parse(it.dateStart) }
             if(!friends_toggle_button.isChecked) main_recyclerview.adapter = MainAdapter(currentUser, sortedBets, 1)
 
             friends_toggle_button.isChecked = false

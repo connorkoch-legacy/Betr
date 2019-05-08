@@ -1,0 +1,31 @@
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginHorizontal="30dp">
+
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add a Friend"
+            android:gravity="center"
+            android:textSize="20dp"/>
+
+    <EditText
+            android:id="@+id/add_friend"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Type a username..."
+            android:layout_marginVertical="20dp"/>
+
+
+    <Button
+            android:id="@+id/find_friend_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Find Friend"
+            android:textSize="24dp"
+            android:layout_marginBottom="5dp"/>
+
+</LinearLayout>
