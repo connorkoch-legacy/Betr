@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.main_recyclerview_listitem.view.*
 import java.util.*
 
-class MainAdapter(val user: User, val sortedBets: MutableList<Bet>, var meOrFriend: Int) :
+class MainAdapter(val user: User, val sortedBets: MutableList<Bet>, val users: MutableList<User>, var meOrFriend: Int) :
     RecyclerView.Adapter<MainAdapter.CustomViewHolder>() { //meOrFriend = 0, me ; = 1, friend
 
     class CustomViewHolder(val view: View) : RecyclerView.ViewHolder(view)
@@ -37,23 +37,34 @@ class MainAdapter(val user: User, val sortedBets: MutableList<Bet>, var meOrFrie
         if(meOrFriend == 0) {
             userName1 = "You"
             userName2 = currentBet.betAcceptor
+
+            //set the profile pic if it's not null, else it's default
+            if(user.profilePic != "") {
+                val imageBytes = Base64.decode(user.profilePic, 0)
+                val image = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
+
+                holder.view.item_imageview.setImageBitmap(image)
+            }
         } else {
             userName1 = currentBet.betCreator
             userName2 = currentBet.betAcceptor
+
+            //set the profile pic if it's not null, else it's default (finds betcreator in user list)
+            for(u in users){
+                if(u.username == currentBet.betCreator && u.profilePic != ""){
+                    val imageBytes = Base64.decode(user.profilePic, 0)
+                    val image = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
+
+                    holder.view.item_imageview.setImageBitmap(image)
+                }
+            }
         }
 
         holder.view.item_textview_1.text = "$userName1 bet $userName2:"
         holder.view.item_textview_2.text = "\t" + currentBet?.betText
         holder.view.item_textview_3.text = "$" + "%.2f".format(currentBet?.betAmount)
 
-        //set the profle pic if it's not null, else it's default
-        if(user.profilePic != "") {
-            for()
-            val imageBytes = Base64.decode(user.profilePic, 0)
-            val image = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
 
-            holder.view.item_imageview.setImageBitmap(image)
-        }
 
         betCounter++
     }

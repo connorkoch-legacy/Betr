@@ -59,9 +59,6 @@ class CreateAccount: AppCompatActivity() {
                 }
                 //Email doesn't match with any user, then create user in database
                 if(!matchFlag){
-                    //new user with no friends
-                    //TODO: MAKE SURE WHEN A FRIEND OR BET IS ADDED TO THE CURRENT USER THE DATABASE IS UPDATED
-                    //TODO: ADD FUNCTIONALITY TO PASS USERS LIST AND CURRENT USER BETWEEN ACTIVITIES
                     val newUser = User(username, password)
 
                     //Push to database with username as key

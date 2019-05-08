@@ -32,8 +32,9 @@ class AddFriend : AppCompatActivity() {
         var currentUser = intent.getParcelableExtra<User>("LOGGED_IN_USER")
 
         find_friend_button.setOnClickListener {
+            //adds the user as a friend if it exists in the db and not already in friend lsit
             for(u in users){
-                if(!(u.username in currentUser.friendList) && u.username == add_friend.text.toString()) {
+                if(u.username !in currentUser.friendList && u.username == add_friend.text.toString()) {
                     //add friend to current user's friend list
                     var mutList = currentUser.friendList.toMutableList()
                     mutList.add(u.username)
@@ -43,6 +44,7 @@ class AddFriend : AppCompatActivity() {
                     mutList.add(currentUser.username)
                     u.friendList = mutList.toList()
 
+                    //push new lists to database
                     database.child("users").child(currentUser.username).setValue(currentUser)
                     database.child("users").child(u.username).setValue(u)
 

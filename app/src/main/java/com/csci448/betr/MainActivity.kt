@@ -53,17 +53,21 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        //temp bets for testing
+        sortedBets.clear()
+
+        //get the current time in the right format
         val sdf = SimpleDateFormat("dd/MM/yyyy hh:mm:ss", Locale.US)
         val cal = Calendar.getInstance()
 
         if(!me_toggle_button.isChecked) {
+            //populate sorted bets
             for(bet in currentUser.betList) {
                 if(bet.accepted == 1) sortedBets.add(bet)
             }
         }
         else { //Or "Friends" tab is selected, get bets from friends
             for(i in 0 until currentUserFriends.size) {
+                //get all friends bets that don't have to do with current user and make sure bets are accepted
                 for(j in 0 until currentUserFriends[i].betList.size){
                     if(currentUserFriends[i].betList[j].betAcceptor != currentUser.username &&
                         currentUserFriends[i].betList[j].betCreator != currentUser.username) {
@@ -79,7 +83,7 @@ class MainActivity : AppCompatActivity() {
 
         //Sets up the recycler view
         main_recyclerview.layoutManager = LinearLayoutManager(this)
-        main_recyclerview.adapter = MainAdapter(currentUser, sortedBets, if(me_toggle_button.isChecked) 1 else 0)
+        main_recyclerview.adapter = MainAdapter(currentUser, sortedBets, users, if(me_toggle_button.isChecked) 1 else 0)
 
 
         //this creates the custom toolbar with the drawer icon and ongoing bets icon
@@ -143,12 +147,13 @@ class MainActivity : AppCompatActivity() {
         }
 
         me_toggle_button.setOnClickListener {
+            //populated sorted bets as done earlier
             sortedBets.clear()
             for(bet in currentUser.betList) {
                 if(bet.accepted == 1) sortedBets.add(bet)
             }
             sortedBets.sortBy{ sdf.parse(it.dateStart) }
-            if(!me_toggle_button.isChecked) main_recyclerview.adapter = MainAdapter(currentUser, sortedBets, 0)
+            if(!me_toggle_button.isChecked) main_recyclerview.adapter = MainAdapter(currentUser, sortedBets, users, 0)
 
 
             me_toggle_button.isChecked = false
@@ -156,6 +161,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         friends_toggle_button.setOnClickListener {
+            //populated sorted bets as done earlier
             sortedBets.clear()
             for(i in 0 until currentUserFriends.size) {
                 for(j in 0 until currentUserFriends[i].betList.size){
@@ -166,7 +172,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             sortedBets.sortBy{ sdf.parse(it.dateStart) }
-            if(!friends_toggle_button.isChecked) main_recyclerview.adapter = MainAdapter(currentUser, sortedBets, 1)
+            if(!friends_toggle_button.isChecked) main_recyclerview.adapter = MainAdapter(currentUser, sortedBets, users, 1)
 
             friends_toggle_button.isChecked = false
             me_toggle_button.isChecked = true
@@ -185,12 +191,4 @@ class MainActivity : AppCompatActivity() {
         }
         return true
     }
-//
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//        if(requestCode == ACCOUNT_REQUEST_CODE){
-//            if(resultCode == Activity.RESULT_OK){
-//
-//            }
-//        }
-//    }
 }

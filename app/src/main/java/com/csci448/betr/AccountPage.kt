@@ -50,6 +50,7 @@ class AccountPage : AppCompatActivity() {
         users = intent.getParcelableArrayListExtra<User>("USER_LIST").toMutableList()
         currentUser = intent.getParcelableExtra<User>("LOGGED_IN_USER")
 
+        //Display the profile pic in the image view if the user has it set
         if(currentUser.profilePic != "") {
             val imageBytes = Base64.decode(currentUser.profilePic, 0)
             val image = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
@@ -66,6 +67,7 @@ class AccountPage : AppCompatActivity() {
             setHomeAsUpIndicator(R.drawable.ic_arrow_back)
         }
 
+        //Brings up the camera so the user can set a profile pic. Asks for permission if it's not yet granted
         profile_picture.setOnClickListener{
             val permission = ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA)
             if(permission == PackageManager.PERMISSION_GRANTED) {
@@ -79,6 +81,7 @@ class AccountPage : AppCompatActivity() {
         }
 
         change_pass_button.setOnClickListener{
+            //Start change pass intent
             var intent = Intent(this, ChangePassword::class.java)
             intent.putParcelableArrayListExtra("USER_LIST", ArrayList(users))
             intent.putExtra("LOGGED_IN_USER", currentUser)
@@ -97,10 +100,6 @@ class AccountPage : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
-//                val returnIntent = Intent()
-//                returnIntent.putParcelableArrayListExtra("USER_LIST", ArrayList(users))
-//                returnIntent.putExtra("LOGGED_IN_USER", currentUser)
-//                setResult(Activity.RESULT_OK, returnIntent)
                 var intent = MainActivity.newIntent(this)
                 intent.putParcelableArrayListExtra("USER_LIST", ArrayList(users))
                 intent.putExtra("LOGGED_IN_USER", currentUser)
@@ -115,7 +114,7 @@ class AccountPage : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-
+        //Gets the bitmap from the camera activity
         if(requestCode == CAMERA_REQUEST_CODE){
             if(resultCode == Activity.RESULT_OK && data != null){
                 //Sets the imageview to the picture just taken

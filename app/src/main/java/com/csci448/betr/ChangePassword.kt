@@ -30,6 +30,7 @@ class ChangePassword : AppCompatActivity() {
 
             val passwordRegex = "^[a-zA-Z0-9]{5,}$".toRegex()
 
+            //Make sure the password is correct and matches with the confirm
             if(!passwordRegex.matches(password)){
                 Toast.makeText(this, "Password field incorrect. Must be 5 or more alphanumeric characters.", Toast.LENGTH_SHORT).show()
             }
@@ -37,6 +38,7 @@ class ChangePassword : AppCompatActivity() {
                 Toast.makeText(this, "Passwords do not match.", Toast.LENGTH_SHORT).show()
             }
             else{
+                //update info in current user and user list
                 currentUser.password = password
                 for(u in users){
                     if(u.username == currentUser.username) {
