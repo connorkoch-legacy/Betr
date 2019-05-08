@@ -1,13 +1,11 @@
 package com.csci448.betr
 
-import android.content.Context
 import android.content.Intent
-import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import kotlinx.android.synthetic.main.ongoing_bet_display_page.*
+import android.os.Bundle
+import kotlinx.android.synthetic.main.activity_old_bet.*
 
-class OngoingBet : AppCompatActivity() {
-
+class old_bet : AppCompatActivity() {
     companion object {
         //Creates an intent for the OptionsActivity to be returned to the calling activity or fragment
         private const val LOG_TAG = "TEST"
@@ -21,7 +19,7 @@ class OngoingBet : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.ongoing_bet_display_page)
+        setContentView(R.layout.activity_old_bet)
 
         users = intent.getParcelableArrayListExtra<User>("USER_LIST").toMutableList()
         currentUser = intent.getParcelableExtra<User>("LOGGED_IN_USER")
@@ -35,6 +33,7 @@ class OngoingBet : AppCompatActivity() {
         title_witle.text = sortedBets[index].betText
         bet_amount.text = "Bet Amount: ${sortedBets[index].betAmount.toString()}"
         participants.text = "Participants: ${sortedBets[index].betCreator.toString()} and ${sortedBets[index].betAcceptor.toString()}"
+        winner.text = "Winner: ${sortedBets[index].winner}"
 
         back_button.setOnClickListener {
             var intent = Intent(this, MainActivity::class.java)

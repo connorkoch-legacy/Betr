@@ -36,6 +36,10 @@ class RequestBet : AppCompatActivity() {
             sortedBets.add(bet)
         }
 
+        title_witle.text = sortedBets[index].betText
+        bet_amount.text = "Bet Amount: ${sortedBets[index].betAmount.toString()}"
+        bet_requestor.text = "Bet Creator: ${sortedBets[index].betCreator.toString()}"
+
         back_button.setOnClickListener {
             var intent = Intent(this, MainActivity::class.java)
             intent.putParcelableArrayListExtra("USER_LIST", ArrayList(users))
@@ -49,6 +53,7 @@ class RequestBet : AppCompatActivity() {
             //accepted = 1, it is normal
             //accepted = 2, dont display
             sortedBets[index].accepted = 1
+            var otherDude = sortedBets[index].betCreator
             for(a in users){
                 if(a.username == currentUser.username){
                     a.betList = sortedBets
@@ -56,7 +61,10 @@ class RequestBet : AppCompatActivity() {
 
                     database.child("users").child(a.username).setValue(a)
                     database.child("users").child(currentUser.username).setValue(currentUser)
-                    break
+                }
+                if(a.username == otherDude){
+                    a.betList = sortedBets
+                    database.child("users").child(a.username).setValue(a)
                 }
             }
         }
@@ -65,6 +73,7 @@ class RequestBet : AppCompatActivity() {
             accept_buttonee.visibility = View.INVISIBLE
             decline_buttonee.visibility = View.INVISIBLE
             sortedBets.remove(sortedBets[index])
+            var otherDude = sortedBets[index].betCreator
             for(a in users){
                 if(a.username == currentUser.username){
                     a.betList = sortedBets
@@ -72,22 +81,14 @@ class RequestBet : AppCompatActivity() {
 
                     database.child("users").child(a.username).setValue(a)
                     database.child("users").child(currentUser.username).setValue(currentUser)
-                    break
+                }
+                if(a.username == otherDude){
+                    a.betList = sortedBets
+                    database.child("users").child(a.username).setValue(a)
                 }
             }
         }
     }
-
-    //TODO: CONNOR ADD DATABSE LINE HERE DUDE @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-    //TODO; @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-    //TODO; @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-    fun updateDatabase(){
-
-    }
-    //TODO; @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-    //TODO; @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-    //TODO; @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
 
     override fun onBackPressed() {
         super.onBackPressed()

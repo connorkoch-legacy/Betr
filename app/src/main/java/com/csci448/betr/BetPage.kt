@@ -12,9 +12,13 @@ import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.Adapter
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_bet_page.*
 
 class BetPage : AppCompatActivity() {
+
+    private var database: DatabaseReference = FirebaseDatabase.getInstance().reference
 
     companion object {
         //Creates an intent for the OptionsActivity to be returned to the calling activity or fragment
@@ -27,6 +31,9 @@ class BetPage : AppCompatActivity() {
         var users = mutableListOf<User>()
         var sortedBets = mutableListOf<Bet>()
         var currentUser: User = User()
+        var updateCondition = 0
+
+
 
     }
 
@@ -38,6 +45,14 @@ class BetPage : AppCompatActivity() {
         currentUser = intent.getParcelableExtra<User>("CURRENT_USER_KEY")
         var currentUserFriends: MutableList<User> = mutableListOf()
         sortedBets = mutableListOf()
+
+        updateCondition = intent.getIntExtra("DB_UPDATE", 0)
+
+        if(updateCondition == 1){ //request update
+
+        }else if(updateCondition == 2){ //finished bet update
+
+        }
 
         Log.d(LOG_TAG, currentUser.username)
 
@@ -58,6 +73,9 @@ class BetPage : AppCompatActivity() {
             if( it[0] == "0"){
                 Log.d(LOG_TAG, "Ongoing")
                 var intent = Intent(this, OngoingBet::class.java)
+                intent.putParcelableArrayListExtra("USER_LIST", ArrayList(users))
+                intent.putExtra("LOGGED_IN_USER", currentUser)
+                intent.putExtra("INDEX", it[2])
                 startActivity(intent)
             }else if(it[0] == "1"){
                 //REQUEST
@@ -69,10 +87,16 @@ class BetPage : AppCompatActivity() {
             }else if(it[0] == "2"){
                 Log.d(LOG_TAG, "Finished, Vote")
                 var intent = Intent(this, FinishedBet::class.java)
+                intent.putParcelableArrayListExtra("USER_LIST", ArrayList(users))
+                intent.putExtra("LOGGED_IN_USER", currentUser)
+                intent.putExtra("INDEX", it[2])
                 startActivity(intent)
             }else{
                 Log.d(LOG_TAG, "Ongoing")
-                var intent = Intent(this, OngoingBet::class.java)
+                var intent = Intent(this, old_bet::class.java)
+                intent.putParcelableArrayListExtra("USER_LIST", ArrayList(users))
+                intent.putExtra("LOGGED_IN_USER", currentUser)
+                intent.putExtra("INDEX", it[2])
                 startActivity(intent)
             }
 
